@@ -48,7 +48,7 @@ export default function HeroSection() {
             className="object-cover"
           />
         </video>
-        <div className="absolute inset-0 bg-gradient-to-r from-[#034D27]/90 to-[#034D27]/70 backdrop-blur-sm" />
+        <div className="absolute inset-0 bg-gradient-to-r from-[#01311f]/90 to-[#01311f]/70 backdrop-blur-sm" />
       </div>
 
       {/* Main Content */}
@@ -58,20 +58,19 @@ export default function HeroSection() {
           className="max-w-2xl space-y-6"
         >
           <h1 className="text-5xl md:text-7xl font-bold leading-tight">
-            <span className="text-white">Shaping </span>
-            <span className="text-[#FFC107]">Tomorrow's</span>
-            <span className="text-white"> Leaders</span>
+            <span className="text-white">Oxford </span>
+            <span className="text-[#FFC107]">House</span>
+            <span className="text-white"> System</span>
           </h1>
           <p className="text-xl md:text-2xl text-white/90 leading-relaxed">
-            Experience excellence in education at Chenab Group of Colleges. 
-            Where innovation meets tradition.
+            Where Excellence meets perfection
           </p>
           <div className="flex flex-wrap gap-4">
             <Link href="/admissions#apply">
               <motion.button
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className="bg-[#FFC107] text-[#034D27] px-8 py-4 rounded-lg font-bold flex items-center gap-2"
+                className="bg-[#FFC107] text-[#01311f] px-8 py-4 rounded-lg font-bold flex items-center gap-2"
               >
                 <span>Apply Now</span>
                 <span className="text-xl">→</span>

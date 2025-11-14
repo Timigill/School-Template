@@ -1,3 +1,266 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+/* Import Bootstrap CSS */
+@import 'bootstrap/dist/css/bootstrap.min.css';
+
+/* Custom CSS Variables */
+:root {
+  --primary-color: #01311f;
+  --secondary-color: #FFC107;
+  --accent-color: #8B5A2B;
+  --text-color: #333333;
+  --light-text: #ffffff;
+  --dark-text: #222222;
+  --light-bg: #f8f9fa;
+  --dark-bg: #022a15;
+  --border-color: #dee2e6;
+  --success-color: #28a745;
+  --warning-color: #ffc107;
+  --danger-color: #dc3545;
+  --info-color: #17a2b8;
+}
+
+/* Global Reset and Base Styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  line-height: 1.6;
+  color: var(--text-color);
+  scroll-behavior: smooth;
+  overflow-x: hidden;
+}
+
+/* Typography Enhancements */
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 700;
+  line-height: 1.2;
+  margin-bottom: 0.5rem;
+}
+
+h1 { font-size: 3rem; }
+h2 { font-size: 2.5rem; }
+h3 { font-size: 2rem; }
+h4 { font-size: 1.5rem; }
+h5 { font-size: 1.25rem; }
+h6 { font-size: 1rem; }
+
+.lead {
+  font-size: 1.25rem;
+  font-weight: 300;
+}
+
+/* Custom Utility Classes */
+.text-warning-custom {
+  color: var(--secondary-color) !important;
+}
+
+.bg-primary-custom {
+  background-color: var(--primary-color) !important;
+}
+
+.bg-secondary-custom {
+  background-color: var(--secondary-color) !important;
+}
+
+.bg-custom-dark {
+  background-color: var(--primary-color) !important;
+}
+
+.border-warning-custom {
+  border-color: var(--secondary-color) !important;
+}
+
+.gradient-bg-primary {
+  background: linear-gradient(135deg, var(--primary-color) 0%, var(--dark-bg) 100%);
+}
+
+.gradient-bg-warning {
+  background: linear-gradient(135deg, var(--secondary-color) 0%, #e6ac00 100%);
+}
+
+/* Hover Effects */
+.hover-text-warning:hover {
+  color: var(--secondary-color) !important;
+  transition: color 0.3s ease;
+}
+
+.hover-bg-warning:hover {
+  background-color: var(--secondary-color) !important;
+  transition: background-color 0.3s ease;
+}
+
+.hover-scale {
+  transition: transform 0.3s ease;
+}
+
+.hover-scale:hover {
+  transform: scale(1.05);
+}
+
+.hover-lift {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.hover-lift:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+}
+
+/* Custom Button Styles */
+.btn-custom-primary {
+  background: linear-gradient(135deg, var(--primary-color) 0%, var(--dark-bg) 100%);
+  border: none;
+  color: white;
+  font-weight: 600;
+  padding: 0.75rem 2rem;
+  border-radius: 50px;
+  transition: all 0.3s ease;
+}
+
+.btn-custom-primary:hover {
+  background: linear-gradient(135deg, var(--dark-bg) 0%, var(--primary-color) 100%);
+  color: white;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(1, 49, 31, 0.3);
+}
+
+.btn-custom-warning {
+  background: linear-gradient(135deg, var(--secondary-color) 0%, #e6ac00 100%);
+  border: none;
+  color: var(--dark-text);
+  font-weight: 600;
+  padding: 0.75rem 2rem;
+  border-radius: 50px;
+  transition: all 0.3s ease;
+}
+
+.btn-custom-warning:hover {
+  background: linear-gradient(135deg, #e6ac00 0%, var(--secondary-color) 100%);
+  color: var(--dark-text);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(255, 193, 7, 0.3);
+}
+
+.btn-custom-outline-warning {
+  border: 2px solid var(--secondary-color);
+  color: var(--secondary-color);
+  background: transparent;
+  font-weight: 600;
+  padding: 0.75rem 2rem;
+  border-radius: 50px;
+  transition: all 0.3s ease;
+}
+
+.btn-custom-outline-warning:hover {
+  background: var(--secondary-color);
+  color: var(--dark-text);
+  transform: translateY(-2px);
+}
+
+/* Enhanced NavBar Styles */
+.navbar-custom {
+  background: linear-gradient(135deg, var(--primary-color) 0%, var(--dark-bg) 100%) !important;
+  backdrop-filter: blur(20px);
+  border-bottom: 2px solid rgba(255, 193, 7, 0.3);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+.navbar-custom .navbar-nav .nav-link {
+  position: relative;
+  transition: all 0.3s ease;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  padding: 0.75rem 1rem;
+  font-size: 0.5rem !important;
+}
+
+.navbar-custom .navbar-nav .nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 0;
+  height: 2px;
+  background: var(--secondary-color);
+  transition: all 0.3s ease;
+  transform: translateX(-50%);
+}
+
+.navbar-custom .navbar-nav .nav-link:hover::after,
+.navbar-custom .navbar-nav .nav-link.active::after {
+  width: 80%;
+}
+
+/* Enhanced Dropdown Styles */
+.dropdown-menu-custom {
+  background: linear-gradient(135deg, var(--primary-color) 0%, var(--dark-bg) 100%) !important;
+  border: 2px solid rgba(255, 193, 7, 0.2) !important;
+  border-radius: 12px !important;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4) !important;
+  backdrop-filter: blur(20px);
+  padding: 0.5rem;
+}
+
+.dropdown-menu-custom .dropdown-item {
+  border-radius: 8px;
+  margin: 2px 0;
+  transition: all 0.2s ease;
+  padding: 0.75rem 1rem;
+  color: var(--light-text);
+}
+
+.dropdown-menu-custom .dropdown-item:hover {
+  background: rgba(255, 193, 7, 0.15) !important;
+  transform: translateX(5px);
+}
+
+/* Logo Styling */
+.navbar-brand img {
+  transition: transform 0.3s ease;
+}
+
+.navbar-brand:hover img {
+  transform: scale(1.05);
+}
+
+/* Footer Custom Styles */
+.footer-custom {
+  background: linear-gradient(135deg, var(--primary-color) 0%, var(--dark-bg) 100%);
+  color: var(--light-text);
+  padding: 3rem 0 1rem;
+}
+
+.footer-custom .text-warning {
+  color: var(--secondary-color) !important;
+}
+
+.footer-custom .text-white-50 {
+  color: rgba(255, 255, 255, 0.8) !important;
+}
+
+.footer-custom .border-white-10 {
+  border-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+/* Form Customization */
+.form-control:focus {
+  border-color: var(--secondary-color);
+  box-shadow: 0 0 0 0.2rem rgba(255, 193, 7, 0.25);
+}
+
+.form-control-custom {
+  border: 2px solid var(--border-color);
+  border-radius: 8px;
+  padding: 0.75rem 1rem;
+  transition: all 0.3s ease;
+}
+
+.form-control-custom:focus {
+  border-color: var(--secondary-color);
+  box-shadow: 0 0 0 0.2rem rgba(255, 193, 7, 0.25);
+}
+
+/* Card Customization */

@@ -27,7 +27,10 @@ export default function Login() {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-[#034D27] to-[#023D1F]">
-      <NavBar />
+      {/* <NavBar /> */}
+      <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+  Launch demo modal
+</button>
       <main className="container mx-auto px-4 py-24">
         <div className="max-w-md mx-auto">
           <div className="bg-white/10 backdrop-blur-md p-8 rounded-xl shadow-lg">
