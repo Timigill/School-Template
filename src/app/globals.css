@@ -228,17 +228,21 @@ h6 { font-size: 1rem; }
 
 /* Footer Custom Styles */
 .footer-custom {
-  background: linear-gradient(135deg, var(--primary-color) 0%, var(--dark-bg) 100%);
-  color: var(--light-text);
+  background: white;
+  /* color: black; */
   padding: 3rem 0 1rem;
 }
 
 .footer-custom .text-warning {
-  color: var(--secondary-color) !important;
+  /* color: var(--secondary-color) !important; */
+  color: #01311f !important;
+  
+  
 }
 
 .footer-custom .text-white-50 {
-  color: rgba(255, 255, 255, 0.8) !important;
+  color: black !important;
+ 
 }
 
 .footer-custom .border-white-10 {
@@ -264,3 +268,52 @@ h6 { font-size: 1rem; }
 }
 
 /* Card Customization */
+/* navbar  */
+.navbar,
+.nav-link,
+.navbar-brand {
+  padding: 0 !important;
+  margin: 0 !important;
+  line-height: 1 !important;
+}
+/* ----- */
+
+
+
+
+
+
+
+
+
+
+/* Dropdown Style */
+.dropdown-menu-custom {
+  display: none;
+  background: #01311f !important;
+  padding: 10px;
+  border-radius: 10px;
+  width: min-content;
+}
+
+.dropdown-menu-custom.show {
+  display: block !important;
+}
+
+/* Dropdown Items */
+.dropdown-item-custom {
+  width: 80%;
+  padding: 10px 14px;
+  background: transparent;
+  color: white !important;
+  font-size: 0.7rem;
+  /* border-radius: 6px; */
+  border: none;
+  text-align: left;
+  transition: 0.25s ease;
+  cursor: pointer;
+}
+
+.dropdown-item-custom:hover {
+  color: #FFD700 !important;
+}

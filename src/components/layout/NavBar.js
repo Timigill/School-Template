@@ -12,13 +12,10 @@ export default function NavBar() {
   const router = useRouter();
 
   const menuItems = [
-    {
-      title: 'Home',
-      path: '/',
-    },
+    { title: 'Home', path: '/' },
+
     {
       title: 'Academics',
-      path: '/academics',
       dropdown: [
         { title: 'Programs', path: '/academics/programs' },
         { title: 'Faculty', path: '/academics/faculty' },
@@ -26,9 +23,9 @@ export default function NavBar() {
         { title: 'Library', path: '/academics/library' },
       ]
     },
+
     {
       title: 'Admissions',
-      path: '/admissions',
       dropdown: [
         { title: 'Apply Now', path: '/admissions/apply' },
         { title: 'Requirements', path: '/admissions/requirements' },
@@ -36,9 +33,9 @@ export default function NavBar() {
         { title: 'FAQs', path: '/admissions/faqs' },
       ]
     },
+
     {
       title: 'Campus Life',
-      path: '/campus-life',
       dropdown: [
         { title: 'Events', path: '/events' },
         { title: 'Student Clubs', path: '/campus-life#clubs' },
@@ -46,19 +43,17 @@ export default function NavBar() {
         { title: 'Housing', path: '/campus-life#housing' },
       ]
     },
+
     {
       title: 'Portals',
-      path: '/portals',
       dropdown: [
         { title: 'Student Login', path: '/portals/student' },
         { title: 'Teacher Login', path: '/portals/teacher' },
         { title: 'Parent Portal', path: '/portals/parent' },
       ]
     },
-    {
-      title: 'Contact',
-      path: '/contact',
-    }
+
+    { title: 'Contact', path: '/contact' }
   ];
 
   const handleDropdownClick = (path) => {
@@ -67,103 +62,125 @@ export default function NavBar() {
     setIsMenuOpen(false);
   };
 
-  const isLinkActive = (path) => {
-    return pathname === path;
-  };
-
   return (
     <header className="fixed-top bg-white z-50 border-bottom border-secondary border-opacity-20 shadow-lg">
       <div className="container-fluid px-4">
         <nav className="navbar navbar-expand-lg navbar-light py-2">
-          {/* Logo/Brand */}
-          <Link href="/" className="navbar-brand me-5 d-flex align-items-center gap-3">
+
+          {/* Logo */}
+          <Link href="/" className="navbar-brand me-5 d-flex align-items-center gap-1">
             <img
               src="/logo.png"
               alt="Oxford House System Logo"
-              className="img-fluid"
-              style={{ height: '50px', width: '50px', objectFit: 'contain' }}
+              style={{ height: '45px', width: '45px', objectFit: 'contain' }}
             />
             <div className="d-flex flex-column">
               <div className="d-flex align-items-baseline">
-                <span className="fw-bold text-uppercase" style={{ fontSize: '1.5rem', color: '#2C5F2D', letterSpacing: '0.5px' }}>
+                <span
+                  className="fw-bold text-uppercase"
+                  style={{
+                    fontSize: '1.8rem',
+                    color: '#01311f',
+                    letterSpacing: '0.5px',
+                  }}
+                >
                   OXFORD
                 </span>
-                <span className="fw-bold text-uppercase ms-2" style={{ fontSize: '1.5rem', color: '#FFD700', letterSpacing: '0.5px' }}>
+                <span
+                  className="fw-bold text-uppercase ms-2"
+                  style={{
+                    fontSize: '1.8rem',
+                    color: '#c6aa58',
+                    letterSpacing: '0.5px',
+                  }}
+                >
                   HOUSE SYSTEM
                 </span>
               </div>
-              <span className="text-warning fw-bold text-uppercase" style={{ fontSize: '0.7rem', marginTop: '-4px' }}>
+              <span
+                className="ms-1 text-uppercase"
+                style={{
+                  fontSize: '0.6rem',
+                  marginTop: '2px',
+                  color: '#c6aa58'
+                }}
+              >
                 WHERE EXCELLENCE MEETS EXPECTATIONS
               </span>
             </div>
           </Link>
 
-          {/* Mobile Menu Button */}
-          <button 
-            className="navbar-toggler border-0" 
-            type="button" 
+          {/* Mobile Toggle */}
+          <button
+            className="navbar-toggler border-0"
+            type="button"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
-            aria-label="Toggle navigation"
           >
             <span className="navbar-toggler-icon"></span>
           </button>
 
-          {/* Navigation Menu */}
+          {/* Menu */}
           <div className={`collapse navbar-collapse ${isMenuOpen ? 'show' : ''}`}>
-            <ul className="navbar-nav ms-auto mb-2 mb-lg-0 gap-">
+            <ul className="navbar-nav ms-auto mb-2 mb-lg-0">
+
               {menuItems.map((item, index) => (
                 <li key={index} className="nav-item dropdown position-static">
-                  <Link
-                    href={item.path}
-                    className={`nav-link px-3 py-1 fw-normal
-                     ${isLinkActive(item.path)
-                       ? 'text-warning bg-warning bg-opacity-10'
-                       : 'text-dark hover-text-warning'
-                     } ${item.dropdown ? 'dropdown-toggle pe-2' : ''}`}
-                    style={{ fontSize: '0.875rem' }}
-                    role={item.dropdown ? 'button' : undefined}
-                    data-bs-toggle={item.dropdown ? 'dropdown' : undefined}
-                    aria-expanded={activeDropdown === item.title ? 'true' : 'false'}
-                    onMouseEnter={() => item.dropdown && setActiveDropdown(item.title)}
-                    onMouseLeave={() => item.dropdown && setActiveDropdown(null)}
-                  >
-                    {item.title}
-                    {item.dropdown && (
-                      <i className="fas fa-chevron-down ms-1 small"></i>
-                    )}
-                  </Link>
 
-                  {/* Dropdown Menu */}
+                  {/* Items with dropdown */}
+                  {item.dropdown ? (
+                    <div
+                      className="nav-link px-3 py-1 fw-normal text-dark dropdown-toggle"
+                      style={{ cursor: 'pointer', fontSize: '0.875rem' }}
+                      onClick={() =>
+                        setActiveDropdown(activeDropdown === item.title ? null : item.title)
+                      }
+                    >
+                      {item.title}
+                      <i className="fas fa-chevron-down ms-1 small"></i>
+                    </div>
+                  ) : (
+                    /* Normal link */
+                    <Link
+                      href={item.path}
+                      className={`nav-link px-3 py-1 fw-normal ${
+                        pathname === item.path ? 'text-warning' : 'text-dark'
+                      }`}
+                      style={{ fontSize: '0.875rem' }}
+                    >
+                      {item.title}
+                    </Link>
+                  )}
+
+                  {/* Dropdown */}
                   {item.dropdown && (
-                    <ul 
-                      className={`dropdown-menu dropdown-menu-custom p-3 border-0 shadow-lg ${
+                    <ul
+                      className={`dropdown-menu dropdown-menu-custom shadow-lg border-0 mt-3 ${
                         activeDropdown === item.title ? 'show' : ''
                       }`}
-                      style={{ minWidth: '220px' }}
                     >
-                      {item.dropdown.map((dropItem, dropIndex) => (
-                        <li key={dropIndex}>
+                      {item.dropdown.map((dropItem, i) => (
+                        <li key={i}>
                           <button
-                            className="dropdown-item text-dark bg-transparent border-0 py-2 px-3 rounded hover-bg-warning"
+                            className="dropdown-item-custom"
                             onClick={() => handleDropdownClick(dropItem.path)}
-                            onMouseEnter={(e) => e.currentTarget.classList.add('hover-bg-warning')}
-                            onMouseLeave={(e) => e.currentTarget.classList.remove('hover-bg-warning')}
                           >
-                            <i className="fas fa-arrow-right me-2 text-warning small"></i>
                             {dropItem.title}
                           </button>
                         </li>
                       ))}
                     </ul>
                   )}
+
                 </li>
               ))}
-            </ul>
 
-           
+            </ul>
           </div>
+
         </nav>
       </div>
     </header>
   );
 }
+
+

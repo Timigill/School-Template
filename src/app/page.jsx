@@ -9,7 +9,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import NavBar from '../components/layout/NavBar';
 import HeroSection from '../components/home/HeroSection';
-// import Footer from '../components/layout/Footer';
+import Footer from '../components/layout/Footer';
 import ContactForm from '../components/contact/ContactForm';
 import MapComponent from '../components/shared/Map';
 
@@ -129,7 +129,7 @@ export default function Home() {
     <main className="min-h-screen bg-custom-dark text-white pt-16">
       <NavBar />
       <HeroSection />
-      {/* <Footer /> */}
+      <Footer />
     </main>
   );
 }
