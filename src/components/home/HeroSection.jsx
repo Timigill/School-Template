@@ -1,143 +1,121 @@
 'use client';
 
-import { motion } from 'framer-motion';
 import Image from 'next/image';
 import Link from 'next/link';
 
-const fadeInUp = {
-  initial: { opacity: 0, y: 20 },
-  whileInView: { opacity: 1, y: 0 },
-  viewport: { once: true },
-  transition: { duration: 0.5 }
-};
-
-const stats = [
-  { number: "1000+", label: "Students", icon: "👨‍🎓" },
-  { number: "50+", label: "Expert Faculty", icon: "👨‍🏫" },
-  { number: "95%", label: "Placement Rate", icon: "📈" },
-  { number: "20+", label: "Years Experience", icon: "🏆" }
-];
-
-const quickLinks = [
-  { icon: "🎓", title: "Apply Now", link: "/admissions#apply", description: "Start your journey" },
-  { icon: "📅", title: "Events", link: "/events", description: "Campus activities" },
-  { icon: "🏫", title: "Programs", link: "/academics#programs", description: "Explore courses" },
-  { icon: "🔐", title: "Portal", link: "/portals/student", description: "Student login" }
-];
-
 export default function HeroSection() {
   return (
-    <section className="relative min-h-screen flex flex-col justify-center">
+    <section className="position-relative min-vh-100 d-flex flex-column justify-content-center bg-dark">
+      
       {/* Video Background */}
-      <div className="absolute inset-0 overflow-hidden">
-        <video
-          autoPlay
-          loop
-          muted
-          playsInline
-          poster="/Task3.0.jpg"
-          className="object-cover w-full h-full"
-        >
-          <source src="/campus-video.mp4" type="video/mp4" />
-          {/* Fallback image */}
-          <Image
-            src="/Task3.0.jpg"
-            alt="Campus"
-            fill
-            priority
-            className="object-cover"
-          />
-        </video>
-        <div className="absolute inset-0 bg-gradient-to-r from-[#01311f]/90 to-[#01311f]/70 backdrop-blur-sm" />
+      <div className="position-absolute top-0 start-0 w-100 h-100 overflow-hidden hero-video">
+        <div className="position-absolute top-0 start-0 w-100 h-100 hero-overlay"></div>
       </div>
 
       {/* Main Content */}
-      <div className="relative container mx-auto px-4 pt-32 md:pt-40">
-        <motion.div 
-          {...fadeInUp} 
-          className="max-w-2xl space-y-6"
-        >
-          <h1 className="text-5xl md:text-7xl font-bold leading-tight">
-            <span className="text-white">Oxford </span>
-            <span className="text-[#FFC107]">House</span>
-            <span className="text-white"> System</span>
+      <div className="position-relative container-fluid pt-5 pb-5 px-5 mx-4"
+      style={{
+        color:"var(--primary-color)"
+      }}>
+        {/* Heading */}
+        
+        <div className="fade-up mb-4" style={{ maxWidth: "900px", marginTop: "10%" }}>
+          <h1 className="display-5 fw-bold">
+
+            Driving Academic Excellence and Transformative Learning <span style={{display: "flex", textAlign:"end"}}>in Gojra</span>
+            {/* Oxford <span className="text-warning">House</span> System */}
           </h1>
-          <p className="text-xl md:text-2xl text-white/90 leading-relaxed">
-            Where Excellence meets perfection
+          <p className="fs-4 text-light"
+          style={{
+            color:"var(----primary-color)"
+          }}
+          >
+           Future Ready Education for Every Child
           </p>
-          <div className="flex flex-wrap gap-4">
+
+          {/* Buttons */}
+          <div className="d-flex flex-wrap gap-3 mt-3">
             <Link href="/admissions#apply">
-              <motion.button
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className="bg-[#FFC107] text-[#01311f] px-8 py-4 rounded-lg font-bold flex items-center gap-2"
+              <button className="btn fw-bold px-4 py-2"
+              style={{backgroundColor: "var(--primary-color)", border:"1px solid white", color:"white"}}
               >
-                <span>Apply Now</span>
-                <span className="text-xl">→</span>
-              </motion.button>
+                Apply Now →
+              </button>
             </Link>
+
             <Link href="/virtual-tour">
-              <motion.button
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className="border-2 border-[#FFC107] text-[#FFC107] px-8 py-4 rounded-lg font-bold flex items-center gap-2"
+              <button className="btn btn-outline-primary fw-bold px-4 py-2"
+              style={{ border:"1px solid white", color:"white"}}
               >
-                <span>Virtual Tour</span>
-                <span className="text-xl">🎥</span>
-              </motion.button>
+               Virtual Tour
+              </button>
             </Link>
           </div>
-        </motion.div>
+        </div>
+
 
         {/* Stats Section */}
-        <motion.div 
-          {...fadeInUp}
-          transition={{ delay: 0.2 }}
-          className="mt-16 grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-8"
-        >
-          {stats.map((stat, index) => (
-            <motion.div
-              key={index}
-              whileHover={{ scale: 1.05 }}
-              className="bg-white/10 backdrop-blur-md rounded-xl p-6 text-center border border-white/10"
+        <div className=" row g-3 mt-5 fade-up">
+          {[
+            { number: "1000+", label: "Students",  },
+            { number: "50+", label: "Expert Faculty",  },
+            { number: "95%", label: "Placement Rate",  },
+            { number: "20+", label: "Years Experience",  }
+          ].map((stat, i) => (
+            <div key={i} className="col-6 col-md-3 "
+           
             >
-              <span className="text-3xl mb-2 block">{stat.icon}</span>
-              <h3 className="text-3xl md:text-4xl font-bold text-[#FFC107] mb-2">{stat.number}</h3>
-              <p className="text-white/80">{stat.label}</p>
-            </motion.div>
+              <div className="glass-card text-center p-4"
+               style={{
+              border:"1px solid var(--primary-color)",
+              backgroundColor: "var(--card-bg)", cursor: 'default'
+            }}
+              >
+                <h3 className="fw-bold fs-2">{stat.number}</h3>
+                <p
+                style={{
+                  color:"var(--primary-color)"
+                }}
+                >{stat.label}</p>
+              </div>
+            </div>
           ))}
-        </motion.div>
+        </div>
 
         {/* Quick Links */}
-        <motion.div 
-          {...fadeInUp}
-          transition={{ delay: 0.4 }}
-          className="mt-16 grid grid-cols-2 md:grid-cols-4 gap-4"
-        >
-          {quickLinks.map((link, index) => (
-            <Link key={index} href={link.link}>
-              <motion.div
-                whileHover={{ scale: 1.05, backgroundColor: 'rgba(255, 255, 255, 0.15)' }}
-                className="bg-white/10 backdrop-blur-md rounded-xl p-6 border border-white/10 transition-colors duration-300"
-              >
-                <span className="text-3xl mb-3 block">{link.icon}</span>
-                <h3 className="text-lg font-bold text-[#FFC107] mb-1">{link.title}</h3>
-                <p className="text-white/70 text-sm">{link.description}</p>
-              </motion.div>
-            </Link>
+        <div className="d row g-3 mt-5 fade-up">
+          {[
+            { title: "Apply Now", link: "/admissions#apply", description: "Start your journey" },
+            { title: "Events", link: "/events", description: "Campus activities" },
+            {  title: "Programs", link: "/academics#programs", description: "Explore courses" },
+            {  title: "Portal", link: "/portals/student", description: "Student login" }
+          ].map((item, i) => (
+            <div key={i} className="col-6 col-md-3">
+              <Link href={item.link}  className='text-decoration-none'>
+                <div className="glass-card p-4 h-100 quick-link"
+                    style={{
+                  border:"1px solid var(--primary-color)", cursor: 'pointer',
+                  backgroundColor: "var(--card-bg)"
+                }}
+                >
+                  <h5 className=" fw-bold mt-2"
+                  style={{
+                    color:"var( --accent-color)"
+                  }}
+                  >{item.title}</h5>
+                  <p className="small"
+                    style={{
+                  color:"var(--primary-color)"
+                }}
+                  >{item.description}</p>
+                </div>
+              </Link>
+            </div>
           ))}
-        </motion.div>
+        </div>
 
         {/* Scroll Indicator */}
-        <motion.div 
-          className="absolute bottom-8 left-1/2 transform -translate-x-1/2"
-          animate={{ y: [0, 10, 0] }}
-          transition={{ duration: 1.5, repeat: Infinity }}
-        >
-          <div className="w-6 h-10 border-2 border-[#FFC107] rounded-full flex justify-center">
-            <div className="w-1 h-3 bg-[#FFC107] rounded-full mt-2"></div>
-          </div>
-        </motion.div>
+        <div className="scroll-indicator mx-auto mt-5"></div>
       </div>
     </section>
   );

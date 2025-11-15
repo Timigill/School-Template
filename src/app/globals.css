@@ -16,6 +16,8 @@
   --warning-color: #ffc107;
   --danger-color: #dc3545;
   --info-color: #17a2b8;
+  --card-bg: rgba(1, 49, 31, 0.2);
+
 }
 
 /* Global Reset and Base Styles */
@@ -38,6 +40,15 @@ h1, h2, h3, h4, h5, h6 {
   font-weight: 700;
   line-height: 1.2;
   margin-bottom: 0.5rem;
+}
+.btn-outline-primary{
+border: 1px solid var(--primary-color) !important;
+color: var(--primary-color) !important;
+
+}
+.btn-outline-primary:hover{
+background-color: var(--primary-color)!important;
+color: white !important;
 }
 
 h1 { font-size: 3rem; }
@@ -164,8 +175,8 @@ h6 { font-size: 1rem; }
 .navbar-custom {
   background: linear-gradient(135deg, var(--primary-color) 0%, var(--dark-bg) 100%) !important;
   backdrop-filter: blur(20px);
-  border-bottom: 2px solid rgba(255, 193, 7, 0.3);
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  border-bottom: 10px solid var(--primary-color) !important;
+  box-shadow: 0 4px 20px var(--primary-color);
 }
 
 .navbar-custom .navbar-nav .nav-link {
@@ -316,4 +327,70 @@ h6 { font-size: 1rem; }
 
 .dropdown-item-custom:hover {
   color: #FFD700 !important;
+}
+/* Video background overlay */
+.hero-overlay {
+  background:  white;
+  backdrop-filter: blur(3px);
+}
+
+/* Fade-in animation */
+.fade-up {
+  opacity: 0;
+  transform: translateY(25px);
+  animation: fadeUp 0.7s ease-out forwards;
+}
+
+@keyframes fadeUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Glass Card effect */
+.glass-card {
+
+  border: 1px solid var(--primary-color);
+  border-radius: 12px;
+  backdrop-filter: blur(8px);
+  transition: 0.3s ease;
+  width: 80%;
+}
+
+.glass-card:hover {
+  transform: scale(1.05);
+  background: rgba(255, 255, 255, 0.2);
+}
+
+/* Quick links hover */
+.quick-link:hover {
+  cursor: pointer;
+}
+
+/* Scroll Indicator */
+.scroll-indicator {
+  width: 30px;
+  height: 50px;
+  border: 2px solid var(--primary-color);
+  border-radius: 25px;
+  position: relative;
+}
+
+.scroll-indicator::after {
+  content: "";
+  width: 6px;
+  height: 12px;
+  background: var(--primary-color);
+  border-radius: 3px;
+  position: absolute;
+  top: 8px;
+  left: 50%;
+  transform: translateX(-50%);
+  animation: scroll 1.5s infinite ease-in-out;
+}
+
+@keyframes scroll {
+  0% { transform: translate(-50%, 0); opacity: 1; }
+  100% { transform: translate(-50%, 20px); opacity: 0; }
 }
