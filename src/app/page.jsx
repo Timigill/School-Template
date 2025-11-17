@@ -10,8 +10,11 @@ import Link from 'next/link';
 import NavBar from '../components/layout/NavBar';
 import HeroSection from '../components/home/HeroSection';
 import Footer from '../components/layout/Footer';
+import WhyChooseUs from '../components/home/why-us';
 import ContactForm from '../components/contact/ContactForm';
 import MapComponent from '../components/shared/Map';
+import CTASection from '../components/home/CTA';
+import VisionMissionValues from '../components/home/MissionVision';
 
 // Animation variants
 const fadeInUp = {
@@ -129,6 +132,9 @@ export default function Home() {
     <main className="min-h-screen bg-custom-dark text-white pt-16">
       <NavBar />
       <HeroSection />
+      <WhyChooseUs />
+      <VisionMissionValues />
+      <CTASection />
       <Footer />
     </main>
   );
