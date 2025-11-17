@@ -14,7 +14,7 @@ const CTASection = () => {
       }}
     >
       <div className="container shadow p-5 rounded-5">
-        <h2 className="mb-3">Join Our School Today!</h2>
+        <h2 className="mb-3">Join our journey of excellence.</h2>
         <p className="mb-4 fs-5">
           Experience quality education, expert teachers, and a nurturing environment for your child.
         </p>
