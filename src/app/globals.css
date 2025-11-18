@@ -304,6 +304,37 @@ h6 { font-size: 1rem; }
   border: 1px solid var(--primary-color) !important;
 
 }
+.scroll-indicator {
+  animation: bounce 1.3s infinite ease-in-out;
+  left: 50%;
+  translate: -50% 0;   /* replaces translateX */
+  scale: 1;             /* base scale */
+  z-index: 9999;
+}
+
+/* Hover effect */
+.scroll-indicator:hover {
+  cursor: pointer;
+  transition: scale 0.3s ease;
+  scale: 1.15 !important;   /* scale only */
+  z-index: 99999;
+}
+
+/* Animation controlling ONLY Y movement */
+@keyframes bounce {
+  0%, 100% {
+    translate: -50% 0;       /* X stays centered, Y = 0 */
+  }
+  50% {
+    translate: -50% 10px;    /* moves DOWN */
+  }
+}
+
+/* Allow hover events to pass */
+.hero-overlay {
+  pointer-events: none !important;
+}
+
 
 
 

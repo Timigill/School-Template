@@ -25,9 +25,9 @@ const WhyChooseUs = () => {
   ];
 
   return (
-    <section className="container-fluid  bg-white w-80 h-100" style={{ color: "var(--primary-color)" }}>
+    <section className="container-fluid py-5 bg-white w-80 h-100" style={{ color: "var(--primary-color)" }}>
       <div className="text-center mb-5">
-        <h2>Why Choose Us</h2>
+        <h2 className="fw-bold">Why Choose Us</h2>
         <p style={{
             color:"var(--primary-color)"
         }}>Discover what makes our school unique</p>

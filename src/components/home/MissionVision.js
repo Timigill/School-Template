@@ -38,10 +38,10 @@ export default function VisionMissionValues() {
 
     return (
         <section
-            className="container-fluid  p-5 w-80 bg-white"
+            className="container-fluid p-5   w-80 bg-white"
             style={{ color: "var(--primary-color)" }}
         >
-            <h1 className="text-center fw-bold mb-3">
+            <h1 className="text-center fw-bold px-5 mb-3 my-5">
                 School Vision, Mission and Values
             </h1>
             <p className="text-center mb-5">
@@ -73,11 +73,10 @@ export default function VisionMissionValues() {
 
                 <div className="col-md-4 text-center mb-4 mb-md-0">
                     <Image
-                        src="/logo.png"
+                        src="/logo1.png"
                         alt="business team"
                         width={200}
                         height={200}
-                        className="shadow"
                     />
                 </div>
 
@@ -102,7 +101,7 @@ export default function VisionMissionValues() {
             </div>
 
             {/* Values Section */}
-            <h3 className="text-center mb-4">Values</h3>
+            <h2 className="text-center fw-bold pt-5 my-4">Values</h2>
             <div className="row justify-content-center">
                 {values.map((value, index) => (
                     <div
