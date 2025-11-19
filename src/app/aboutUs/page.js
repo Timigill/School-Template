@@ -6,7 +6,7 @@ export default function OxfordHouseSystemPage() {
     <main className="page-root">
       {/* HERO */}
       <header className="hero">
-        <div className="hero-overlay" />
+        <div className="hero-overlay1" />
         <div className="hero-inner">
           <h1 className="hero-title">Oxford House System</h1>
           <p className="hero-sub">A project of Chenab Group of Colleges</p>
@@ -14,7 +14,7 @@ export default function OxfordHouseSystemPage() {
       </header>
 
       {/* MAIN CONTENT */}
-      <div className="container">
+      <div className="container py-5">
 
         {/* Legacy / About */}
         <section className="section about">

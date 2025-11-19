@@ -510,7 +510,7 @@ h6 {
   justify-content: center;
 }
 
-.hero-overlay {
+.hero-overlay1 {
   position: absolute;
   inset: 0;
   background: var(--primary-color);
