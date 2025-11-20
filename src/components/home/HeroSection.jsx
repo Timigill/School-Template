@@ -53,34 +53,44 @@ export default function HeroSection() {
 
 
         {/* Stats Section */}
-        <div className=" row g-5 mt-5 fade-up">
-          {[
-            { number: "1000+", label: "Students", },
-            { number: "50+", label: "Expert Faculty", },
-            { number: "95%", label: "Placement Rate", },
-            { number: "20+", label: "Years Experience", }
-          ].map((stat, i) => (
-            <div key={i} className="col-6 col-md-3 "
-
-            >
-              <div className="glass-card  text-center p-2 align-middle m-auto"
-                style={{
-                  border: "1px solid var(--primary-color)",
-                  backgroundColor: "var(--card-bg)", cursor: 'default'
-                }}
-              >
-                <h3 style={{
-                  color: "white"
-                }} className="fw-bold fs-2">{stat.number}</h3>
-                <p
-                  style={{
-                    color: "white"
-                  }}
-                >{stat.label}</p>
-              </div>
-            </div>
-          ))}
+<div className="position-relative mt-5 pt-4">
+  
+  {/* Stats Section */}
+  <div className="row g-5 fade-up">
+    {[ 
+      { number: "1000+", label: "Students" },
+      { number: "50+", label: "Expert Faculty" },
+      { number: "95%", label: "Placement Rate" },
+      { number: "20+", label: "Years Experience" }
+    ].map((stat, i) => (
+      <div key={i} className="col-6 col-md-3">
+        <div
+          className="glass-card text-center p-2 m-auto"
+          style={{
+            border: "1px solid var(--primary-color)",
+            backgroundColor: "var(--card-bg)",
+            cursor: "default"
+          }}
+        >
+          <h3 className="fw-bold fs-2" style={{ color: "white" }}>
+            {stat.number}
+          </h3>
+          <p style={{ color: "white" }}>{stat.label}</p>
         </div>
+      </div>
+    ))}
+  </div>
+
+  {/* Scroll Indicator */}
+  <div
+    className="scroll-indicator position-absolute m-auto"
+    style={{
+      left: "50%",
+      transform: "translateX(-50%) !important",
+      bottom: "-85px", // adjust as needed
+    }}
+  ></div>
+</div>
 
         {/* Quick Links */}
         <div className="row g-5 mt-5 fade-up">
@@ -118,9 +128,6 @@ export default function HeroSection() {
             </div>
           ))}
         </div>
-
-        {/* Scroll Indicator */}
-        <div className="scroll-indicator mx-auto mt-5"></div>
       </div>
     </section>
   );
