@@ -32,7 +32,7 @@
     ".next/types/**/*.ts",
     "**/*.ts",
     "**/*.tsx"
-, "src/app/contact/page.js", "src/app/academics/programs/page.js", "src/app/academics/faculty/page.js", "src/app/academics/research/page.js", "src/app/academics/library/page.js"  ],
+, "src/app/contact/page.js", "src/app/academics/programs/page.js", "src/app/academics/faculty/page.js", "src/app/academics/research/page.js", "src/app/academics/library/page.js", "src/app/admissions/apply/page.js", "src/app/admissions/requirements/page.js", "src/app/admissions/scholarships/page.js", "src/app/admissions/faqs/page.js"  ],
   "exclude": [
     "node_modules"
   ]
