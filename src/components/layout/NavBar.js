@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { usePathname, useRouter } from 'next/navigation';
 import { FaChevronDown } from 'react-icons/fa';
 
@@ -26,9 +27,12 @@ export default function NavBar() {
 
           {/* Logo */}
           <Link href="/" className="navbar-brand d-flex align-items-center gap-1">
-            <img
+            <Image
               src="/logo1.png"
               alt="Oxford House System Logo"
+              width={45}
+              height={45}
+              className="object-fit-contain"
               style={{ height: '45px', width: '45px', objectFit: 'contain' }}
             />
             <div className="d-flex flex-column justify-content-center" style={{ height: '50px' }}>

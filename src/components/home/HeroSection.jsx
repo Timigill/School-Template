@@ -10,10 +10,11 @@ export default function HeroSection() {
       {/* Hero Background Image */}
       {/* Hero Background Image */}
       <div className="position-absolute top-0 end-0 w-100 w-lg-50 h-100 overflow-hidden d-none d-lg-block" style={{ width: '50%' }}>
-        <img
+        <Image
           src="/mask/flag2.png"
           alt="Oxford House System"
-          className="w-100 h-100 object-fit-cover"
+          fill
+          className="object-fit-cover"
         />
         <div className="position-absolute top-0 start-0 w-100 h-100 hero-overlay"></div>
       </div>

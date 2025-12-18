@@ -37,7 +37,7 @@ export default function TestimonialCard({ testimonial }) {
       </div>
 
       <blockquote className="text-white/80 italic mb-4">
-        "{testimonial.quote}"
+        &quot;{testimonial.quote}&quot;
       </blockquote>
 
       {testimonial.company && (

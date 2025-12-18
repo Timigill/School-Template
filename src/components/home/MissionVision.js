@@ -45,9 +45,9 @@ export default function VisionMissionValues() {
                 School Vision, Mission and Values
             </h1>
             <p className="text-center mb-5">
-                Explore the guiding principles and  
-                goals that shape our students' learning,
-                 growth, and character development.
+                Explore the guiding principles and
+                goals that shape our students&apos; learning,
+                growth, and character development.
             </p>
 
 
@@ -63,10 +63,10 @@ export default function VisionMissionValues() {
                             }
                         >VISION</h4>
                         <ul className="text-start mt-3">
-                        Empowering future leaders through excellence in education, 
-                        we nurture global citizens who learn without limits. 
-                        By inspiring lifelong learning, we create meaningful opportunities for every student to grow, 
-                        explore, and reach their fullest potential.
+                            Empowering future leaders through excellence in education,
+                            we nurture global citizens who learn without limits.
+                            By inspiring lifelong learning, we create meaningful opportunities for every student to grow,
+                            explore, and reach their fullest potential.
                         </ul>
                     </div>
                 </div>
@@ -90,11 +90,11 @@ export default function VisionMissionValues() {
                             }
                         >MISSION</h4>
                         <ul className="text-start mt-3">
-                         Fostering creativity and growth while building character daily,
-                          we nurture global citizens with holistic skills.
-                           By engaging both minds and hearts,
-                           we cultivate an environment where learners thrive, develop,
-                          and pursue their highest aspirations.
+                            Fostering creativity and growth while building character daily,
+                            we nurture global citizens with holistic skills.
+                            By engaging both minds and hearts,
+                            we cultivate an environment where learners thrive, develop,
+                            and pursue their highest aspirations.
                         </ul>
                     </div>
                 </div>

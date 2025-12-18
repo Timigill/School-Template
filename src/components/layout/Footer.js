@@ -3,6 +3,7 @@
 
 import { FaFacebookF, FaInstagram, FaTwitter, FaYoutube } from "react-icons/fa";
 import Link from "next/link";
+import Image from "next/image";
 
 export default function Footer() {
   return (
@@ -17,10 +18,12 @@ export default function Footer() {
               href="/"
               className="d-flex align-items-center gap-2 mb-2 text-decoration-none"
             >
-              <img
+              <Image
                 src="/logo.png"
                 alt="Oxford House System Logo"
-                style={{ height: "45px", width: "45px", objectFit: "contain" }}
+                width={45}
+                height={45}
+                className="object-fit-contain"
               />
               <div className="d-flex flex-column">
                 <span className="fw-bold text-uppercase" style={{ fontSize: "1.2rem", color: "#01311f", lineHeight: "1.2" }}>
@@ -63,12 +66,12 @@ export default function Footer() {
             <div className="ms-3">
               <h5 className="fw-bold text-warning mb-3">Quick Links</h5>
               <ul className="list-unstyled m-0 p-0">
-                <li><a href="/" className="text-decoration-none" style={{ color: "gray" }}>Home</a></li>
-                <li><a href="/academics" className="text-decoration-none" style={{ color: "gray" }}>Academics</a></li>
-                <li><a href="/admissions" className="text-decoration-none" style={{ color: "gray" }}>Admissions</a></li>
-                <li><a href="/contact" className="text-decoration-none" style={{ color: "gray" }}>Campus Life</a></li>
-                <li><a href="/portals" className="text-decoration-none" style={{ color: "gray" }}>Portals</a></li>
-                <li><a href="/contact" className="text-decoration-none" style={{ color: "gray" }}>Contact</a></li>
+                <li><Link href="/" className="text-decoration-none" style={{ color: "gray" }}>Home</Link></li>
+                <li><Link href="/academics" className="text-decoration-none" style={{ color: "gray" }}>Academics</Link></li>
+                <li><Link href="/admissions" className="text-decoration-none" style={{ color: "gray" }}>Admissions</Link></li>
+                <li><Link href="/contact" className="text-decoration-none" style={{ color: "gray" }}>Campus Life</Link></li>
+                <li><Link href="/portals" className="text-decoration-none" style={{ color: "gray" }}>Portals</Link></li>
+                <li><Link href="/contact" className="text-decoration-none" style={{ color: "gray" }}>Contact</Link></li>
               </ul>
             </div>
           </div>

@@ -77,7 +77,7 @@ export default function OxfordHouseSystemPage() {
             </blockquote>
 
             <div className="chair-meta">
-              <img src="/auther3.jpg" alt="Director" className="chair-photo" />
+              <Image src="/auther3.jpg" alt="Director" width={72} height={72} className="chair-photo" />
               <div>
                 <div className="chair-name">Director — Oxford House System</div>
                 <div className="chair-title">Chenab Group of Colleges</div>
@@ -142,28 +142,28 @@ export default function OxfordHouseSystemPage() {
           </div>
 
 
-<div className="grid leadership-grid">
-  {[
-    { name: "Mam Sarah", role: "CEO", image: "/auther2.jpg" },
-    { name: "Sir Imran ul Haq", role: "Director", image: "/auther3.jpg" },
-    { name: "Sir Bilal", role: "General Secretary", image: "/auther3.jpg" },
-  ].map((p) => (
-    <figure key={p.name} className="leader">
-      <Image
-        src={p.image}
-        alt={p.name}
-        width={100}
-        height={100}
-        className="leader-photo rounded-circle"
-      />
+          <div className="grid leadership-grid">
+            {[
+              { name: "Mam Sarah", role: "CEO", image: "/auther2.jpg" },
+              { name: "Sir Imran ul Haq", role: "Director", image: "/auther3.jpg" },
+              { name: "Sir Bilal", role: "General Secretary", image: "/auther3.jpg" },
+            ].map((p) => (
+              <figure key={p.name} className="leader">
+                <Image
+                  src={p.image}
+                  alt={p.name}
+                  width={100}
+                  height={100}
+                  className="leader-photo rounded-circle"
+                />
 
-      <figcaption>
-        <strong>{p.name}</strong>
-        <span className="role">{p.role}</span>
-      </figcaption>
-    </figure>
-  ))}
-</div>
+                <figcaption>
+                  <strong>{p.name}</strong>
+                  <span className="role">{p.role}</span>
+                </figcaption>
+              </figure>
+            ))}
+          </div>
 
         </section>
 
