@@ -1,7 +1,7 @@
 'use client';
 
-import NavBar from '../../../components/layout/NavBar';
-import Footer from '../../../components/layout/Footer';
+import NavBar from '../../components/layout/NavBar';
+import Footer from '../../components/layout/Footer';
 
 export default function FacultyPage() {
   const departments = [
@@ -53,14 +53,14 @@ export default function FacultyPage() {
         {/* MAIN HEADING */}
         <h1
           className="text-center fw-bold mb-5"
-          style={{ color: "#c6aa58", fontSize: "3rem" }}
+          style={{ color: "#ffc107", fontSize: "3rem" }}
         >
           {/* Our Faculty */}
         </h1>
 
         {departments.map((department, index) => (
           <div key={index} className="mb-5">
-            <h2 className="fw-bold mb-4 text-center" style={{ color: "#c6aa58" }}>
+            <h2 className="fw-bold mb-4 text-center" style={{ color: "#ffc107" }}>
               {department.name} Department
             </h2>
 

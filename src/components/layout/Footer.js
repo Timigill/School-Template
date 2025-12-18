@@ -24,9 +24,9 @@ export default function Footer() {
               />
               <div className="d-flex flex-column">
                 <span className="fw-bold text-uppercase" style={{ fontSize: "1.2rem", color: "#01311f", lineHeight: "1.2" }}>
-                  OXFORD <span style={{ color: "#c6aa58" }}>HOUSE SYSTEM</span>
+                  OXFORD <span style={{ color: "#ffc107" }}>HOUSE SYSTEM</span>
                 </span>
-                <span className="text-uppercase" style={{ fontSize: "0.6rem", color: "#c6aa58", lineHeight: "1.2" }}>
+                <span className="text-uppercase" style={{ fontSize: "0.6rem", color: "#ffc107", lineHeight: "1.2" }}>
                   WHERE EXCELLENCE MEETS EXPECTATIONS
                 </span>
               </div>
@@ -64,10 +64,9 @@ export default function Footer() {
               <h5 className="fw-bold text-warning mb-3">Quick Links</h5>
               <ul className="list-unstyled m-0 p-0">
                 <li><a href="/" className="text-decoration-none" style={{ color: "gray" }}>Home</a></li>
-                <li><a href="/academics" className="text-decoration-none" style={{ color: "gray" }}>Academics</a></li>
-                <li><a href="/admissions" className="text-decoration-none" style={{ color: "gray" }}>Admissions</a></li>
-                <li><a href="/contact" className="text-decoration-none" style={{ color: "gray" }}>Campus Life</a></li>
-                <li><a href="/portals" className="text-decoration-none" style={{ color: "gray" }}>Portals</a></li>
+                <li><a href="/aboutUs" className="text-decoration-none" style={{ color: "gray" }}>About Us</a></li>
+                <li><a href="/faculty" className="text-decoration-none" style={{ color: "gray" }}>Faculty</a></li>
+                <li><a href="/events" className="text-decoration-none" style={{ color: "gray" }}>Events</a></li>
                 <li><a href="/contact" className="text-decoration-none" style={{ color: "gray" }}>Contact</a></li>
               </ul>
             </div>

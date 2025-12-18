@@ -33,7 +33,7 @@ export default function Contact() {
                 {/* FORM HEADING */}
                 <h2
                   className="fw-semibold mb-4 text-center"
-                  style={{ color: "#c6aa58" }}
+                  style={{ color: "#ffc107" }}
                 >
                   Get in Touch
                 </h2>
@@ -100,8 +100,8 @@ export default function Contact() {
                     className="btn w-100 fw-semibold"
                     style={{
                       background: "#01311f",
-                      color: "#c6aa58",
-                      border: "1px solid #c6aa58"
+                      color: "#ffc107",
+                      border: "1px solid #ffc107"
                     }}
                   >
                     Send Message
@@ -122,7 +122,7 @@ export default function Contact() {
               >
                 <h2
                   className="fw-semibold mb-4 text-center"
-                  style={{ color: "#c6aa58" }}
+                  style={{ color: "#ffc107" }}
                 >
                   Contact Information
                 </h2>
