@@ -9,7 +9,7 @@ const CTASection = () => {
     <section
       className="container-fluid py-5 text-center bg-white"
       style={{
-
+          
         color: "var(--primary-color)",
       }}
     >
@@ -19,11 +19,11 @@ const CTASection = () => {
           Experience quality education, expert teachers, and a nurturing environment for your child.
         </p>
         <a
-          href="/contact" // link to your admissions/enrollment page
+          href="/admissions" // link to your admissions/enrollment page
           className="btn btn-primary btn-lg fw-bold"
           style={{ color: "var(--primary-color)" }}
         >
-          Contact Us
+          Enroll Now
         </a>
       </div>
     </section>
