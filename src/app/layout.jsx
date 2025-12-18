@@ -5,8 +5,8 @@ import { Toaster } from 'react-hot-toast';
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata = {
-  title: 'Chenab Group of Colleges',
-  description: 'Excellence in Education',
+  title:'Oxford House System',
+  description: 'Where Excellence Meets Perfection',
   icons: {
     icon: '/favico.ico', // or '/favicon.png'
   },

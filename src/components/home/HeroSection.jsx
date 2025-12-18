@@ -7,13 +7,19 @@ export default function HeroSection() {
   return (
     <section className="position-relative min-vh-100 d-flex flex-column justify-content-center bg-dark">
 
-      {/* Video Background */}
-      <div className="position-absolute top-0 start-0 w-100 h-100 overflow-hidden hero-video">
+      {/* Hero Background Image */}
+      {/* Hero Background Image */}
+      <div className="position-absolute top-0 end-0 w-100 w-lg-50 h-100 overflow-hidden d-none d-lg-block" style={{ width: '50%' }}>
+        <img
+          src="/mask/flag2.png"
+          alt="Oxford House System"
+          className="w-100 h-100 object-fit-cover"
+        />
         <div className="position-absolute top-0 start-0 w-100 h-100 hero-overlay"></div>
       </div>
 
       {/* Main Content */}
-      <div className="position-relative container-fluid pt-5 pb-5 px-5 mx-4"
+      <div className="position-relative container-fluid pt-5 mt-5 pb-5 px-2 mx-4"
         style={{
           color: "var(--primary-color)"
         }}>
@@ -25,9 +31,9 @@ export default function HeroSection() {
             Driving Academic Excellence and Transformative Learning <span style={{ display: "flex", textAlign: "end" }}>in Gojra</span>
             {/* Oxford <span className="text-warning">House</span> System */}
           </h1>
-          <p className="fs-4 text-light"
+          <p className=" "
             style={{
-              color: "var(----primary-color)"
+              fontSize: "1.2rem"
             }}
           >
             Future Ready Education for Every Child
@@ -53,44 +59,44 @@ export default function HeroSection() {
 
 
         {/* Stats Section */}
-<div className="position-relative mt-5 pt-4">
-  
-  {/* Stats Section */}
-  <div className="row g-5 fade-up">
-    {[ 
-      { number: "1000+", label: "Students" },
-      { number: "50+", label: "Expert Faculty" },
-      { number: "95%", label: "Placement Rate" },
-      { number: "20+", label: "Years Experience" }
-    ].map((stat, i) => (
-      <div key={i} className="col-6 col-md-3">
-        <div
-          className="glass-card text-center p-2 m-auto"
-          style={{
-            border: "1px solid var(--primary-color)",
-            backgroundColor: "var(--card-bg)",
-            cursor: "default"
-          }}
-        >
-          <h3 className="fw-bold fs-2" style={{ color: "white" }}>
-            {stat.number}
-          </h3>
-          <p style={{ color: "white" }}>{stat.label}</p>
-        </div>
-      </div>
-    ))}
-  </div>
+        <div className="position-relative mt-5 pt-4">
 
-  {/* Scroll Indicator */}
-  <div
-    className="scroll-indicator position-absolute m-auto"
-    style={{
-      left: "50%",
-      transform: "translateX(-50%) !important",
-      bottom: "-85px", // adjust as needed
-    }}
-  ></div>
-</div>
+          {/* Stats Section */}
+          <div className="row g-5 fade-up">
+            {[
+              { number: "1000+", label: "Students" },
+              { number: "50+", label: "Expert Faculty" },
+              { number: "95%", label: "Placement Rate" },
+              { number: "20+", label: "Years Experience" }
+            ].map((stat, i) => (
+              <div key={i} className="col-6 col-md-3">
+                <div
+                  className="glass-card text-center p-2 m-auto"
+                  style={{
+                    border: "1px solid var(--primary-color)",
+                    backgroundColor: "var(--card-bg)",
+                    cursor: "default"
+                  }}
+                >
+                  <h3 className="fw-bold fs-2" style={{ color: "white" }}>
+                    {stat.number}
+                  </h3>
+                  <p style={{ color: "white" }}>{stat.label}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {/* Scroll Indicator */}
+          <div
+            className="scroll-indicator position-absolute m-auto"
+            style={{
+              left: "50%",
+              transform: "translateX(-50%) !important",
+              bottom: "-85px", // adjust as needed
+            }}
+          ></div>
+        </div>
 
         {/* Quick Links */}
         <div className="row g-5 mt-5 fade-up">
@@ -108,15 +114,15 @@ export default function HeroSection() {
                     backgroundColor: "var(--card-bg)"
                   }}
                 >
-                  <h5
+                  <h4
                     className="fw-bold mt-2"
                     style={{
-                      color: "var(--accent-color)",
-                      WebkitTextStroke: "0.2px white"
+                      color: "White",
+                      // WebkitTextStroke: "0.2px white"
                     }}
                   >
                     {item.title}
-                  </h5>
+                  </h4>
 
                   <p className="small"
                     style={{

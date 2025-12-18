@@ -230,6 +230,15 @@ h6 {
   width: 80%;
 }
 
+/* Glassmorphism Navbar */
+.navbar-glass {
+  background: rgba(255, 255, 255, 0.7) !important;
+  backdrop-filter: blur(3px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+  
+  transition: all 0.3s ease;
+}
+
 /* Enhanced Dropdown Styles */
 .dropdown-menu-custom {
   background: linear-gradient(135deg, var(--primary-color) 0%, var(--dark-bg) 100%) !important;
@@ -409,7 +418,7 @@ h6 {
 
 /* Video background overlay */
 .hero-overlay {
-  background: white;
+  background: rgba(255, 255, 255, 0.7);
   backdrop-filter: blur(3px);
 }
 
