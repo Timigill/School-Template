@@ -56,7 +56,7 @@ export default function EventsPage() {
               <h2>{event.title}</h2>
               <p>{event.description}</p>
 
-              <button className="btn btn-custom-outline-warning">Read More</button>
+              <button className="btn btn-outline-primary">Read More</button>
             </div>
           </div>
         ))}
