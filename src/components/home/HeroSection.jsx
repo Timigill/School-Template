@@ -42,17 +42,17 @@ export default function HeroSection() {
 
           {/* Buttons */}
           <div className="d-flex flex-wrap gap-3 mt-3">
-            <Link href="/admissions#apply">
+            <Link href="/contact">
               <button className="btn btn-primary fw-bold px-4 py-2">
-                Apply Now →
+                Contact Us
               </button>
             </Link>
 
-            <Link href="/virtual-tour">
+            <Link href="/contact">
               <button className="btn btn-outline-primary fw-bold px-4 py-2"
                 style={{ border: "1px solid white", color: "white" }}
               >
-                Virtual Tour
+               Visit Us
               </button>
             </Link>
           </div>

@@ -15,6 +15,7 @@ import ContactForm from '../components/contact/ContactForm';
 import MapComponent from '../components/shared/Map';
 import CTASection from '../components/home/CTA';
 import VisionMissionValues from '../components/home/MissionVision';
+import CoreValues from '../components/home/CoreValues';
 
 // Animation variants
 const fadeInUp = {
@@ -134,6 +135,7 @@ export default function Home() {
       <HeroSection />
       <WhyChooseUs />
       <VisionMissionValues />
+      <CoreValues />
       <CTASection />
       <Footer />
     </main>
