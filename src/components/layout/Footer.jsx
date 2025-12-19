@@ -19,7 +19,7 @@ export default function Footer() {
               className="d-flex align-items-center gap-2 mb-2 text-decoration-none"
             >
               <Image
-                src="/logo.png"
+                src="/logo1.png"
                 alt="Oxford House System Logo"
                 width={45}
                 height={45}
