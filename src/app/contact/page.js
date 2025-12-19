@@ -263,7 +263,7 @@ export default function Contact() {
 //                 </div>
 //                 <div>
 //                   <h3 className="text-white font-medium mb-2">Email</h3>
-//                   <p className="text-white/80">info@chenabcollege.edu</p>
+//                   <p className="text-white/80">info@oxfordhousesystem.edu</p>
 //                 </div>
 //                 <div>
 //                   <h3 className="text-white font-medium mb-2">Office Hours</h3>

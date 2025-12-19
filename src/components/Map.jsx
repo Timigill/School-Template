@@ -4,7 +4,7 @@ import { GoogleMap, LoadScript, Marker } from '@react-google-maps/api';
 
 const Map = () => {
   const center = {
-    lat: 32.1877, // Chenab College coordinates (example)
+    lat: 32.1877, // Oxford House System coordinates (example)
     lng: 74.1945
   };
 
