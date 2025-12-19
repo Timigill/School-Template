@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { usePathname, useRouter } from 'next/navigation';
@@ -8,6 +8,7 @@ import { FaChevronDown } from 'react-icons/fa';
 
 export default function NavBar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isVisible, setIsVisible] = useState(true);
 
   const pathname = usePathname();
   const router = useRouter();
@@ -20,8 +21,31 @@ export default function NavBar() {
     { title: 'Contact', path: '/contact' }
   ];
 
+  useEffect(() => {
+    let timeout;
+    const handleScroll = () => {
+      setIsVisible(false);
+      clearTimeout(timeout);
+      timeout = setTimeout(() => {
+        setIsVisible(true);
+      }, 200);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      clearTimeout(timeout);
+    };
+  }, []);
+
   return (
-    <header className="fixed-top navbar-glass z-50">
+    <header
+      className="fixed-top navbar-glass z-50"
+      style={{
+        transform: isVisible ? 'translateY(0)' : 'translateY(-100%)',
+        transition: 'transform 0.3s ease-in-out'
+      }}
+    >
       <nav className="navbar navbar-expand-lg navbar-light py-2 w-100">
         <div className="container-fluid px-3 px-md-4">
 
@@ -37,7 +61,7 @@ export default function NavBar() {
             />
             <div className="d-flex flex-column justify-content-center" style={{ height: '50px' }}>
               <div className="d-flex align-items-baseline" style={{ lineHeight: '1' }}>
-                <span className=" text-uppercase" style={{ fontSize: '2.1rem', fontWeight: '800', color: '#01311f', lineHeight: '1' }}>
+                <span className=" text-uppercase" style={{ fontSize: '2.1rem', fontWeight: '800', color: '#053b27ff', lineHeight: '1' }}>
                   OXFORD HOUSE SYSTEM
                 </span>
               </div>

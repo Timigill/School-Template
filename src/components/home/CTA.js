@@ -9,21 +9,21 @@ const CTASection = () => {
     <section
       className="container-fluid py-5 text-center bg-white"
       style={{
-          
+
         color: "var(--primary-color)",
       }}
     >
-      <div className="container shadow p-5 rounded-5">
-        <h2 className="mb-3">Join our journey of excellence.</h2>
-        <p className="mb-4 fs-5">
+      <div className="container  p-5 rounded-5">
+        <h1 className=" fw-bold mb-1">Join our Journey of Excellence.</h1>
+        <p className="mb-4 " style={{fontSize: '1.2rem'}}>
           Experience quality education, expert teachers, and a nurturing environment for your child.
         </p>
         <a
-          href="/admissions" // link to your admissions/enrollment page
+          href="/contact" // link to your admissions/enrollment page
           className="btn btn-primary btn-lg fw-bold"
           style={{ color: "var(--primary-color)" }}
         >
-          Enroll Now
+          Visit Us Now
         </a>
       </div>
     </section>
