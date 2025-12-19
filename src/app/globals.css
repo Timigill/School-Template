@@ -775,3 +775,99 @@ h6 {
     text-align: center;
   }
 }
+
+@media (max-width: 576px) {
+  .hero-mobile h1,
+  .hero-mobile .subtitle {
+    padding: 0 20px;
+    font-size: 30px;
+  }
+
+ .glass-card{
+  width: 80%;
+  min-height: 130px;
+ }
+ .scroll-indicator{
+  left: 54% !important;
+ }
+
+  /* BUTTONS CENTER FIX */
+  .hero-mobile .fade-up > div {
+    justify-content: center;
+  }
+
+/* QUICK LINKS GRID GAP FIX */
+  .hero-mobile .row.g-5 {
+    --bs-gutter-x: 0.75rem;
+    --bs-gutter-y: 0.75rem;
+    margin-top: 2rem !important;
+  }
+
+  /* QUICK LINK CARD COMPACT */
+  .hero-mobile .quick-link {
+    padding: 0.75rem !important;
+    text-align: center;
+  }
+
+  .hero-mobile .quick-link h4 {
+    font-size: 1rem;
+    margin-bottom: 0.25rem;
+  }
+
+  .hero-mobile .quick-link p {
+    font-size: 0.8rem;
+    margin-bottom: 0;
+  }
+
+
+   /* mission vission */
+   .image-wrapper {
+    padding: 0 !important;
+    margin: 0 !important;
+    max-width: 160px; /* chhota kar do logo ka wrapper */
+  }
+  .info-box {
+    max-width: 90%; /* mobile pe boxes thoda expand ho jaye */
+    padding-top: .8rem !important;
+  }
+}
+
+/* Navbar logo and text */
+.navbar-brand .logo-img {
+  width: 45px;
+  height: 45px;
+  object-fit: contain;
+}
+
+.navbar-brand .brand-title {
+  font-size: 2.1rem;
+  font-weight: 800;
+  color: #053b27ff;
+  line-height: 1;
+}
+
+.navbar-brand .brand-tagline {
+  font-size: 0.7rem;
+  color: #ffc107;
+  letter-spacing: 1px;
+  line-height: 1;
+}
+.navbar-toggler:focus {
+  outline: none;
+  box-shadow: none;
+}
+
+/* Mobile adjustments */
+@media (max-width: 576px) {
+  .navbar-brand .logo-img {
+    width: 40px;
+    height: 40px;
+  }
+  .navbar-brand .brand-title {
+    font-size: 1.3rem;
+  }
+  .navbar-brand .brand-tagline {
+    font-size: 0.55rem;
+  }
+  
+}

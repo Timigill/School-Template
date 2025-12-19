@@ -1,15 +1,17 @@
-'use client';
+"use client";
 
-import Image from 'next/image';
-import Link from 'next/link';
+import Image from "next/image";
+import Link from "next/link";
 
 export default function HeroSection() {
   return (
-    <section className="position-relative min-vh-100 d-flex flex-column justify-content-center bg-dark">
-
+    <section className="hero-mobile position-relative min-vh-100 d-flex flex-column justify-content-center bg-dark">
       {/* Hero Background Image */}
       {/* Hero Background Image */}
-      <div className="position-absolute top-0 end-0 w-100 w-lg-50 h-100 overflow-hidden d-none d-lg-block" style={{ width: '50%' }}>
+      <div
+        className="position-absolute top-0 end-0 w-100 w-lg-50 h-100 overflow-hidden"
+        style={{ width: "50%" }}
+      >
         <Image
           src="/mask/flag2.png"
           alt="Oxford House System"
@@ -20,21 +22,27 @@ export default function HeroSection() {
       </div>
 
       {/* Main Content */}
-      <div className="position-relative container-fluid pt-5 mt-5 pb-5 px-2 mx-4"
+      <div
+        className="position-relative container-fluid pt-5 mt-5 pb-5 px-2"
         style={{
-          color: "var(--primary-color)"
-        }}>
+          color: "var(--primary-color)",
+        }}
+      >
         {/* Heading */}
 
-        <div className="fade-up mb-4" style={{ maxWidth: "900px", marginTop: "10%" }}>
+        <div
+          className="fade-up mb-4"
+          style={{ maxWidth: "900px", marginTop: "10%", marginLeft: "2%" }}
+        >
           <h1 className="display-5 fw-bold">
-
-            Driving Academic Excellence and Transformative Learning <span style={{ display: "flex", textAlign: "end" }}>in Gojra</span>
+            Driving Academic Excellence and Transformative Learning{" "}
+            <span style={{ display: "flex", textAlign: "end" }}>in Gojra</span>
             {/* Oxford <span className="text-warning">House</span> System */}
           </h1>
-          <p className=" "
+          <p
+            className="subtitle mt-3"
             style={{
-              fontSize: "1.2rem"
+              fontSize: "1.2rem",
             }}
           >
             Future Ready Education for Every Child
@@ -49,26 +57,25 @@ export default function HeroSection() {
             </Link>
 
             <Link href="/contact">
-              <button className="btn btn-outline-primary fw-bold px-4 py-2"
+              <button
+                className="btn btn-outline-primary fw-bold px-4 py-2"
                 style={{ border: "1px solid white", color: "white" }}
               >
-               Visit Us
+                Visit Us
               </button>
             </Link>
           </div>
         </div>
 
-
         {/* Stats Section */}
-        <div className="position-relative mt-5 pt-4">
-
+        <div className="position-relative mt-4 pt-4 ">
           {/* Stats Section */}
-          <div className="row g-5 fade-up">
+          <div className="row g-3 fade-up">
             {[
               { number: "1000+", label: "Students" },
               { number: "50+", label: "Expert Faculty" },
               { number: "95%", label: "Placement Rate" },
-              { number: "20+", label: "Years Experience" }
+              { number: "20+", label: "Years Experience" },
             ].map((stat, i) => (
               <div key={i} className="col-6 col-md-3">
                 <div
@@ -76,7 +83,7 @@ export default function HeroSection() {
                   style={{
                     border: "1px solid var(--primary-color)",
                     backgroundColor: "var(--card-bg)",
-                    cursor: "default"
+                    cursor: "default",
                   }}
                 >
                   <h3 className="fw-bold fs-2" style={{ color: "white" }}>
@@ -94,7 +101,7 @@ export default function HeroSection() {
             style={{
               left: "50%",
               transform: "translateX(-50%) !important",
-              bottom: "-85px", // adjust as needed
+              bottom: "-50px", // adjust as needed
             }}
           ></div>
         </div>
@@ -102,17 +109,35 @@ export default function HeroSection() {
         {/* Quick Links */}
         <div className="row g-5 mt-5 fade-up">
           {[
-            { title: "Apply Now", link: "/admissions#apply", description: "Start your journey" },
-            { title: "Events", link: "/events", description: "Campus activities" },
-            { title: "Programs", link: "/academics#programs", description: "Explore courses" },
-            { title: "Portal", link: "/portals/student", description: "Student login" }
+            {
+              title: "Apply Now",
+              link: "/admissions#apply",
+              description: "Start your journey",
+            },
+            {
+              title: "Events",
+              link: "/events",
+              description: "Campus activities",
+            },
+            {
+              title: "Programs",
+              link: "/academics#programs",
+              description: "Explore courses",
+            },
+            {
+              title: "Portal",
+              link: "/portals/student",
+              description: "Student login",
+            },
           ].map((item, i) => (
             <div key={i} className="col-6 col-md-3">
-              <Link href={item.link} className='text-decoration-none'>
-                <div className="glass-card p-2 mx-auto quick-link"
+              <Link href={item.link} className="text-decoration-none">
+                <div
+                  className="glass-card p-2 mx-auto quick-link"
                   style={{
-                    border: "1px solid var(--primary-color)", cursor: 'pointer',
-                    backgroundColor: "var(--card-bg)"
+                    border: "1px solid var(--primary-color)",
+                    cursor: "pointer",
+                    backgroundColor: "var(--card-bg)",
                   }}
                 >
                   <h4
@@ -125,11 +150,14 @@ export default function HeroSection() {
                     {item.title}
                   </h4>
 
-                  <p className="small"
+                  <p
+                    className="small"
                     style={{
-                      color: "white"
+                      color: "white",
                     }}
-                  >{item.description}</p>
+                  >
+                    {item.description}
+                  </p>
                 </div>
               </Link>
             </div>
