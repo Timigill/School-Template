@@ -44,25 +44,10 @@ export default function Footer() {
 
           </div>
 
-          {/* Contact Info */}
-          <div className="col-12 col-md-3">
-            <div className="ms-3">
-              <h5 className="fw-bold text-warning mb-3">Contact Info</h5>
-              <ul className="list-unstyled m-0 p-0" style={{ color: "gray" }}>
-                <li>
-                  Samundri Road Near Umer Medical Store<br />
-                  Gojra, Punjab, Pakistan
-                </li>
-                <li>
-                  <span>0463511488</span> | <span>0300-6558589</span>
-                </li>
-                <li>oxfordhousesystem@gmail.com</li>
-              </ul>
-            </div>
-          </div>
+
 
           {/* Quick Links */}
-          <div className="col-12 col-md-3">
+          <div className="col-12 col-md-3 d-flex flex-column align-items-center align-items-md-start">
             <div className="ms-3">
               <h5 className="fw-bold text-warning mb-3">Quick Links</h5>
               <ul className="list-unstyled m-0 p-0">
@@ -128,6 +113,23 @@ export default function Footer() {
                   <FaYoutube size={20} className="me-2" /> YouTube
                 </a>
               </div>
+            </div>
+          </div>
+
+          {/* Contact Info */}
+          <div className="col-12 col-md-3 d-flex flex-column align-items-center align-items-md-start">
+            <div className="ms-3">
+              <h5 className="fw-bold text-warning mb-3">Contact Info</h5>
+              <ul className="list-unstyled m-0 p-0" style={{ color: "gray" }}>
+                <li>
+                  Samundri Road Near Umer Medical Store<br />
+                  Gojra, Punjab, Pakistan
+                </li>
+                <li>
+                  <span>0463511488</span> | <span>0300-6558589</span>
+                </li>
+                <li>oxfordhousesystem@gmail.com</li>
+              </ul>
             </div>
           </div>
 
