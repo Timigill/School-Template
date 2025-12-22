@@ -162,8 +162,10 @@ export default function VisionMissionValues() {
         }
         @media (max-width: 576px) {
           h2 {
-            font-size: 1.9rem !important;
+            font-size: 1.5rem !important;
           }
+            h4{
+            fonsize: 1rem !important; }
           .info-box {
             max-width: 90%;
             padding: 1.5rem 1rem;
@@ -171,6 +173,12 @@ export default function VisionMissionValues() {
           .image-wrapper img {
             width: 100px !important;
             height: 100px !important;
+          }
+            .info-box h4 {
+            font-size: 1rem !important;
+          }
+            .info-box p {
+            font-size: 0.75rem !important;
           }
         }
       `}</style>

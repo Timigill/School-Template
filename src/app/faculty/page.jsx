@@ -1,7 +1,4 @@
-'use client';
-
-import NavBar from '../../components/layout/NavBar';
-import Footer from '../../components/layout/Footer';
+"use client";
 
 export default function FacultyPage() {
   const departments = [
@@ -13,16 +10,16 @@ export default function FacultyPage() {
           position: "Department Head",
           qualification: "Ph.D. in Computer Science",
           specialization: "Artificial Intelligence",
-          image: "/images/faculty/sarah-johnson.jpg"
+          image: "/images/faculty/sarah-johnson.jpg",
         },
         {
           name: "Prof. Michael Chen",
           position: "Senior Professor",
           qualification: "Ph.D. in Software Engineering",
           specialization: "Software Architecture",
-          image: "/images/faculty/michael-chen.jpg"
+          image: "/images/faculty/michael-chen.jpg",
         },
-      ]
+      ],
     },
     {
       name: "Business Administration",
@@ -32,22 +29,21 @@ export default function FacultyPage() {
           position: "Department Head",
           qualification: "Ph.D. in Business Management",
           specialization: "Strategic Management",
-          image: "/images/faculty/james-wilson.jpg"
+          image: "/images/faculty/james-wilson.jpg",
         },
         {
           name: "Prof. Emily Brown",
           position: "Associate Professor",
           qualification: "Ph.D. in Finance",
           specialization: "Financial Management",
-          image: "/images/faculty/emily-brown.jpg"
+          image: "/images/faculty/emily-brown.jpg",
         },
-      ]
+      ],
     },
   ];
 
   return (
     <div style={{ minHeight: "100vh", background: "white" }}>
-      <NavBar />
 
       <main className="container py-5">
         {/* MAIN HEADING */}
@@ -60,23 +56,26 @@ export default function FacultyPage() {
 
         {departments.map((department, index) => (
           <div key={index} className="mb-5">
-            <h2 className="fw-bold mb-4 text-center" style={{ color: "#c6aa58" }}>
+            <h2
+              className="fw-bold mb-4 text-center department-heading"
+              style={{ color: "#c6aa58" }}
+            >
               {department.name} Department
             </h2>
 
-            <div className="row justify-content-center g-4">
+            <div className="row justify-content-center g-3">
               {department.faculty.map((member, idx) => (
-                <div key={idx} className="col-md-6 col-lg-4">
+                <div key={idx} className="col-6 col-md-6 col-lg-4">
                   <div
-                    className="p-4 rounded shadow-lg h-100"
+                    className="p-3 rounded shadow-sm h-100"
                     style={{ background: "white", border: "1px solid #ddd" }}
                   >
                     <div className="mb-3 text-center">
                       <div
                         className="rounded-circle overflow-hidden"
                         style={{
-                          width: "120px",
-                          height: "120px",
+                          width: "100px",
+                          height: "100px",
                           margin: "0 auto",
                           backgroundColor: "#f0f0f0",
                           display: "flex",
@@ -90,25 +89,38 @@ export default function FacultyPage() {
                       </div>
                     </div>
 
-                    <h3 className="text-center mb-1" style={{ color: "gray" }}>
+                    <h3
+                      className="text-center mb-1"
+                      style={{ color: "gray", fontSize: "1rem" }}
+                    >
                       {member.name}
                     </h3>
-                    <p className="text-center mb-2" style={{ color: "#01311f", fontWeight: "500" }}>
+                    <p
+                      className="text-center mb-2"
+                      style={{
+                        color: "#01311f",
+                        fontWeight: "500",
+                        fontSize: "0.85rem",
+                      }}
+                    >
                       {member.position}
                     </p>
 
-                    <div style={{ color: "gray", fontSize: "0.9rem" }}>
+                    <div style={{ color: "gray", fontSize: "0.8rem" }}>
                       <p className="mb-1">{member.qualification}</p>
-                      <p className="mb-0">Specialization: {member.specialization}</p>
+                      <p className="mb-0">
+                        Specialization: {member.specialization}
+                      </p>
                     </div>
 
                     <button
                       className="btn w-100 mt-3 fw-semibold"
                       style={{
                         background: "#01311f",
-                        color: "gray",
+                        color: "white",
                         borderRadius: "8px",
                         border: "2px solid #01311f",
+                        fontSize: "0.8rem",
                       }}
                     >
                       View Profile
@@ -120,27 +132,38 @@ export default function FacultyPage() {
           </div>
         ))}
       </main>
+      <style jsx>{`
+        @media (max-width: 576px) {
+          .department-heading {
+            font-size: 1.6rem !important;
+          }
 
-      <Footer />
+          h1 {
+            font-size: 2rem !important;
+          }
+
+          .faculty-card h3 {
+            font-size: 0.9rem !important;
+          }
+
+          .faculty-card p {
+            font-size: 0.75rem !important;
+          }
+
+          .faculty-card button {
+            font-size: 0.75rem !important;
+          }
+
+          .faculty-card .rounded-circle {
+            width: 80px !important;
+            height: 80px !important;
+          }
+        }
+      `}</style>
+
     </div>
   );
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 // 'use client';
 
@@ -239,4 +262,4 @@ export default function FacultyPage() {
 //       <Footer />
 //     </div>
 //   );
-// } 
+// }

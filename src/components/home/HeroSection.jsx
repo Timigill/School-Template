@@ -5,11 +5,10 @@ import Link from "next/link";
 
 export default function HeroSection() {
   return (
-    <section className="hero-mobile position-relative min-vh-100 d-flex flex-column justify-content-center bg-dark">
-      {/* Hero Background Image */}
-      {/* Hero Background Image */}
+    <section className="hero-mobile position-relative min-vh-100 d-flex flex-column justify-content-center bg-white">
+      {/* Desktop Background Image (unchanged) */}
       <div
-        className="position-absolute top-0 end-0 w-100 w-lg-50 h-100 overflow-hidden"
+        className="position-absolute top-0 end-0 w-100 w-lg-50 h-100 overflow-hidden d-none d-md-block"
         style={{ width: "50%" }}
       >
         <Image
@@ -21,15 +20,37 @@ export default function HeroSection() {
         <div className="position-absolute top-0 start-0 w-100 h-100 hero-overlay"></div>
       </div>
 
+      {/* Mobile Background Image (top half only) */}
+      {/* Mobile Background Image (top half only) */}
+      <div
+className="position-absolute top-0 start-0 w-100 d-md-none overflow-hidden hero-mobile-bg"
+        style={{ zIndex: 0 }}
+      >
+        <Image
+          src="/mask/flag2.png"
+          alt="Oxford House System"
+          fill
+          className="object-fit-cover"
+          style={{
+            objectPosition: "85% center",
+          }}
+        />
+        {/* White overlay */}
+        <div
+          className="position-absolute top-0 start-0 w-100 h-100"
+          style={{
+            backgroundColor: "rgba(255, 255, 255, 0.6)",
+            zIndex: 1,
+          }}
+        ></div>
+      </div>
+
       {/* Main Content */}
       <div
         className="position-relative container-fluid pt-5 mt-5 pb-5 px-2"
-        style={{
-          color: "var(--primary-color)",
-        }}
+        style={{ color: "var(--primary-color)", zIndex: 1 }}
       >
         {/* Heading */}
-
         <div
           className="fade-up mb-4"
           style={{ maxWidth: "900px", marginTop: "10%", marginLeft: "2%" }}
@@ -37,19 +58,13 @@ export default function HeroSection() {
           <h1 className="display-5 fw-bold">
             Driving Academic Excellence and Transformative Learning{" "}
             <span style={{ display: "flex", textAlign: "end" }}>in Gojra</span>
-            {/* Oxford <span className="text-warning">House</span> System */}
           </h1>
-          <p
-            className="subtitle mt-3"
-            style={{
-              fontSize: "1.2rem",
-            }}
-          >
+          <p className="subtitle mt-3" style={{ fontSize: "1.2rem" }}>
             Future Ready Education for Every Child
           </p>
 
           {/* Buttons */}
-          <div className="d-flex flex-wrap gap-3 mt-3">
+          <div className="d-flex flex-wrap gap-3 mt-3 buttons">
             <Link href="/contact">
               <button className="btn btn-primary fw-bold px-4 py-2">
                 Contact Us
@@ -68,8 +83,7 @@ export default function HeroSection() {
         </div>
 
         {/* Stats Section */}
-        <div className="position-relative mt-4 pt-4 ">
-          {/* Stats Section */}
+        <div className="position-relative mt-4 pt-4">
           <div className="row g-3 fade-up">
             {[
               { number: "1000+", label: "Students" },
@@ -101,7 +115,7 @@ export default function HeroSection() {
             style={{
               left: "50%",
               transform: "translateX(-50%) !important",
-              bottom: "-50px", // adjust as needed
+              bottom: "-50px",
             }}
           ></div>
         </div>
@@ -140,22 +154,10 @@ export default function HeroSection() {
                     backgroundColor: "var(--card-bg)",
                   }}
                 >
-                  <h4
-                    className="fw-bold mt-2"
-                    style={{
-                      color: "White",
-                      // WebkitTextStroke: "0.2px white"
-                    }}
-                  >
+                  <h4 className="fw-bold mt-2" style={{ color: "White" }}>
                     {item.title}
                   </h4>
-
-                  <p
-                    className="small"
-                    style={{
-                      color: "white",
-                    }}
-                  >
+                  <p className="small" style={{ color: "white" }}>
                     {item.description}
                   </p>
                 </div>

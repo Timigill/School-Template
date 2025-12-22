@@ -24,7 +24,7 @@ const CTASection = () => {
           className="fw-bold mb-3"
           style={{ fontSize: "1.8rem", lineHeight: "1.2" }}
         >
-          Join our Journey of Excellence
+          Join our Journey of <br /> Excellence
         </h1>
         <p
           className="mb-4"
@@ -52,14 +52,15 @@ const CTASection = () => {
         padding-top: 0 !important;
         }
           h1 {
-            font-size: 1.5rem !important;
+            font-size: 1.3rem !important;
           }
           p {
-            font-size: 0.9rem !important;
+            font-size: 0.66rem !important;
           }
           .btn {
-            width: 60%;
-            padding: 0.75rem 0;
+          font-size: 0.9rem !important;
+            width: 45%;
+            padding: 0.35rem 0 !important;
           }
         }
         .btn-primary:hover {

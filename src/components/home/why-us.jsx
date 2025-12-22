@@ -70,7 +70,7 @@ const WhyChooseUs = () => {
 
         @media (max-width: 576px) {
         .container h2{
-        font-size:1.8rem !important;}
+        font-size:1.5rem !important;}
           .feature-card {
             padding: 1.5rem .6rem;
           }
@@ -79,10 +79,10 @@ const WhyChooseUs = () => {
             height: 50px;
           }
           h5 {
-            font-size: 0.95rem;
+            font-size: 0.85rem !important;
           }
           p {
-            font-size: 0.75rem;
+            font-size: 0.65rem;
           }
         }
       `}</style>
