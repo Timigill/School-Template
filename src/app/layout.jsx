@@ -1,34 +1,30 @@
-import { Inter } from 'next/font/google';
-import './globals.css';
-import { Toaster } from 'react-hot-toast';
+import { Inter } from "next/font/google";
+import "./globals.css";
 
-import NavBar from '../components/layout/NavBar';
-import Footer from '../components/layout/Footer';
+import NavBar from "../components/layout/NavBar";
+import Footer from "../components/layout/Footer";
+import Providers from "./providers";
 
-const inter = Inter({ subsets: ['latin'] });
+const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
-  title: 'Oxford House System',
-  description: 'Where Excellence Meets Perfection',
+  title: "Oxford House System",
+  description: "Where Excellence Meets Perfection",
   icons: {
-    icon: '/favico.ico', // or '/favicon.png'
+    icon: "/favico.ico",
   },
 };
 
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <head>
-
-
-      </head>
       <body className={inter.className}>
-        <Toaster />
-        <NavBar />
-        {children}
-        <Footer />
+        <Providers>
+          <NavBar />
+          {children}
+          <Footer />
+        </Providers>
       </body>
     </html>
   );
-
 }
