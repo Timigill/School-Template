@@ -22,7 +22,7 @@ export default function AdminLogin() {
     });
 
     if (!res.error) {
-      router.push("/admin/dashboard");
+      router.replace("/admin");
     } else {
       if (res.error === "wrong-email") {
         toast.error("Wrong email!", { position: "top-center" });
