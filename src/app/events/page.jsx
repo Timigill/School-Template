@@ -1,208 +1,314 @@
-'use client';
+"use client";
 
-
-
-const upcomingEvents = [
-  {
-    id: 1,
-    title: "Annual Sports Day",
-    date: "2024-03-25",
-    time: "09:00 AM – 01:00 PM",
-    location: "College Ground",
-    description:
-      "Join us for a day of athletic excellence and friendly competition.",
-    image: "/mask/flag2.png",
-  },
-  {
-    id: 2,
-    title: "Science Exhibition",
-    date: "2024-04-05",
-    time: "10:00 AM – 03:00 PM",
-    location: "Science Block",
-    description: "Showcasing innovative projects from our talented students.",
-    image: "/mask/flag2.png",
-  },
-];
+import { useEffect, useState } from "react";
 
 export default function EventsPage() {
-  return (
-    <div style={{ minHeight: "100vh", background: "#f8f9fa" }}>
+  const [events, setEvents] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [activeEvent, setActiveEvent] = useState(null);
 
+  useEffect(() => {
+    const fetchEvents = async () => {
+      try {
+        const res = await fetch("/api/events");
+        const data = await res.json();
+        setEvents(data);
+      } catch (err) {
+        console.error("Failed to fetch events", err);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchEvents();
+  }, []);
+
+  return (
+    <div className="events-page-container">
       {/* HERO */}
-      <section className="hero-sec"
-        style={{
-          height: "50vh",
-          backgroundColor: "var(--primary-color)",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          textAlign: "center",
-          position: "relative",
-          color: "var(--secondary-color)",
-        }}
-      >
-        <div
-          style={{
-            position: "absolute",
-            top: 0,
-            left: 0,
-            width: "100%",
-            height: "100%",
-            backgroundColor: "rgba(1, 49, 31, 0.6)",
-          }}
-        ></div>
-        <div style={{ position: "relative", zIndex: 1 }}>
-          <h1 style={{ fontSize: "3rem", fontWeight: "700" }}>EVENTS</h1>
-          <p
-            style={{
-              fontSize: "1.2rem",
-              maxWidth: "600px",
-              margin: "1rem auto",
-            }}
-          >
-            Discover upcoming events, gatherings, and activities happening at
-            our campus.
-          </p>
+      <section className="events-hero">
+        <div className="events-hero-overlay"></div>
+        <div className="events-hero-content">
+          <h1>Campus Events</h1>
+          <p>Discover upcoming events, gatherings, and activities happening on our campus.</p>
         </div>
       </section>
 
       {/* EVENTS LIST */}
-      <main className="container py-5">
-        <h2
-          className="text-center fw-bold mb-5"
-          style={{ color: "#01311f", fontSize: "2rem" }}
-        >
-          Upcoming Events
-        </h2>
+      <main className="events-main container py-5">
+        <h2 className="events-section-title">Upcoming Events</h2>
 
-        <div className="row g-4">
-          {upcomingEvents.map((event) => {
-            const dateObj = new Date(event.date);
-            const day = dateObj.getDate();
-            const month = dateObj.toLocaleString("default", { month: "short" });
+        {loading ? (
+          <p className="text-center">Loading events...</p>
+        ) : events.length === 0 ? (
+          <p className="text-center text-muted">No upcoming events available.</p>
+        ) : (
+          <div className="row g-4">
+            {events.map((event) => {
+              const dateObj = new Date(event.date);
+              const day = dateObj.getDate();
+              const month = dateObj.toLocaleString("default", { month: "short" });
+              const shortDesc =
+                event.description.length > 80
+                  ? event.description.slice(0, 80) + "..."
+                  : event.description;
 
-            return (
-              <div key={event.id} className="col-12 col-md-6">
-                <div className="event-card rounded shadow-sm overflow-hidden">
-                  <div
-                    style={{
-                      display: "flex",
-                      justifyContent: "center",
-                      marginBottom: "1rem",
-                    }}
-                  >
-                    <img
-                      src={event.image}
-                      alt={event.title}
-                      className="event-img-circle"
-                    />
-                  </div>
-
-                  <div className="p-3">
-                    <p
-                      style={{
-                        color: "#01311f",
-                        fontWeight: "600",
-                        marginBottom: "0.5rem",
-                      }}
-                    >
-                      {month} {day}
-                    </p>
-                    <h3
-                      style={{
-                        color: "#022a15",
-                        fontWeight: "700",
-                        marginBottom: "0.5rem",
-                      }}
-                    >
-                      {event.title}
-                    </h3>
-                    <p
-                      style={{
-                        color: "gray",
-                        fontSize: "0.9rem",
-                        marginBottom: "0.5rem",
-                      }}
-                    >
-                      {event.location} • {event.time}
-                    </p>
-                    <p style={{ color: "#333", fontSize: "0.9rem" }}>
-                      {event.description}
-                    </p>
-                    <button className="btn event-btn mt-2 p-2">
-                      View Details →
-                    </button>
+              return (
+                <div key={event._id} className="col-12 col-md-6">
+                  <div className="event-card-new">
+                    <div className="event-card-date">
+                      <span>{month}</span>
+                      <strong>{day}</strong>
+                    </div>
+                    <div className="event-card-body">
+                      <div className="event-card-icon">📅</div>
+                      <div className="event-card-info">
+                        <h3>{event.title}</h3>
+                        <p className="event-meta">{event.location} • {event.time}</p>
+                        <p className="event-desc">{shortDesc}</p>
+                        <button className="event-view-btn" onClick={() => setActiveEvent(event)}>
+                          View Details →
+                        </button>
+                      </div>
+                    </div>
                   </div>
                 </div>
-              </div>
-            );
-          })}
-        </div>
+              );
+            })}
+          </div>
+        )}
       </main>
 
+      {/* MODAL */}
+      {activeEvent && (
+        <div className="event-modal-overlay" onClick={() => setActiveEvent(null)}>
+          <div className="event-modal" onClick={(e) => e.stopPropagation()}>
+            <h3>{activeEvent.title}</h3>
+            <p className="event-meta">{activeEvent.location} • {activeEvent.time}</p>
+            <div className="event-modal-desc">
+              <p>{activeEvent.description}</p>
+            </div>
+            <button className="event-modal-close" onClick={() => setActiveEvent(null)}>
+              Close
+            </button>
+          </div>
+        </div>
+      )}
+
+      {/* STYLES */}
       <style jsx>{`
-        .event-img-circle {
-          width: 150px;
-          height: 150px;
-          margin-top: 1rem;
-          object-fit: cover;
-          padding: 2px;
-          border-radius: 50%;
-          border: 2px solid var(--border-color);
-          transition: border 0.3s ease, transform 0.3s ease;
+        .events-page-container {
+          min-height: 100vh;
+          background: #f8f9fa;
         }
 
-        .event-img-circle:hover {
-          border-color: var(--primary-color);
-          transform: scale(1.05);
+        /* HERO */
+        .events-hero {
+          height: 45vh;
+          background: var(--primary-color);
+          position: relative;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          text-align: center;
+          color: #fff;
+        }
+        .events-hero-overlay {
+          position: absolute;
+          inset: 0;
+          background: rgba(1, 49, 31, 0.65);
+        }
+        .events-hero-content {
+          position: relative;
+          z-index: 2;
+          max-width: 700px;
+          padding: 0 16px;
+        }
+        .events-hero h1 {
+          font-size: 3rem;
+          font-weight: 700;
+        }
+        .events-hero p {
+          font-size: 1.1rem;
+          margin-top: 10px;
         }
 
-        .event-card {
+        .events-section-title {
+          text-align: center;
+          font-size: 2rem;
+          font-weight: 700;
+          color: #01311f;
+          margin-bottom: 40px;
+        }
+
+        /* EVENT CARD */
+        .event-card-new {
           background: #fff;
-          border: 1px solid var(--primary-color);
-          transition: transform 0.3s ease, box-shadow 0.3s ease;
+          border-radius: 14px;
+          border: 1px solid #e5e7eb;
+          overflow: hidden;
+          transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        .event-card-new:hover {
+          transform: translateY(-4px);
+          box-shadow: 0 12px 25px rgba(0,0,0,0.15);
         }
 
-        .event-card:hover {
-          box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3) !important;
+        .event-card-date {
+          background: var(--primary-color);
+          color: #ffc107;
+          padding: 12px;
+          text-align: center;
+        }
+        .event-card-date span {
+          display: block;
+          font-size: 14px;
+        }
+        .event-card-date strong {
+          font-size: 24px;
         }
 
-        .event-btn {
-          width: 100%;
-          background: #01311f;
+        .event-card-body {
+          display: flex;
+          gap: 16px;
+          padding: 16px;
+          align-items: center;
+        }
+        .event-card-icon {
+          font-size: 80px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          width: 120px;
+          height: 120px;
+          border-radius: 12px;
+          background: #e5f1e0;
+          border: 2px solid var(--primary-color);
+        }
+
+        .event-card-info h3 {
+          margin: 0;
+          color: #022a15;
+          font-weight: 700;
+        }
+        .event-meta {
+          font-size: 14px;
+          color: gray;
+          margin: 6px 0;
+        }
+        .event-desc {
+          font-size: 14px;
+          color: #333;
+        }
+        .event-view-btn {
+          margin-top: 10px;
+          padding: 8px 14px;
+          background: var(--primary-color);
           color: #ffc107;
           border: none;
-          border-radius: 5px;
+          border-radius: 8px;
           font-weight: 600;
+          cursor: pointer;
           transition: background 0.3s ease, color 0.3s ease;
         }
-
-        .event-btn:hover {
+        .event-view-btn:hover {
           background: #ffc107;
-          color: #01311f;
+          color: var(--primary-color);
         }
 
+        /* MODAL */
+        .event-modal-overlay {
+          position: fixed;
+          inset: 0;
+          background: rgba(0,0,0,0.7);
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          z-index: 9999;
+        }
+        .event-modal {
+          background: #ccc;
+          border: 3px solid var(--primary-color) ;
+          padding: 24px;
+          border-radius: 12px;
+          max-width: 500px;
+          width: 90%;
+          max-height: 80vh;
+          overflow-y: auto;
+          text-align: center;
+          position: relative;
+          animation: eventFadeIn 0.3s ease;
+          box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+        }
+        .event-modal-desc {
+          margin: 16px 0;
+          font-size: 14px;
+          color: #333;
+          text-align: left;
+        }
+        .event-modal-close {
+          margin-top: 12px;
+          padding: 4px 16px;
+          background: var(--primary-color);
+          color: #ffc107;
+          border: none;
+          border-radius: 8px;
+          cursor: pointer;
+          font-weight: 600;
+        }
+        .event-modal-close:hover {
+          background: #ffc107;
+          color: var(--primary-color);
+        }
+
+        @keyframes eventFadeIn {
+          from { opacity: 0; transform: translateY(-10px); }
+          to { opacity: 1; transform: translateY(0); }
+        }
+
+       
         @media (max-width: 576px) {
-        .hero-sec{
-        padding: 0 1rem !important;
-        height: 35vh !important;}
-          
-          h1{
-          font-size: 35px !important;
-          }
-          p{
-          font-size: 16px !important;}
-          h2{
-          font-size:26px !important;  
-          }
-          h3{
-          font-size: 24px !important;
-          text-align: center !important;}
-        }
-          .event-card{
-          margin: 5px 20px !important;}
-      `}</style>
+  /* HERO */
+  .events-hero { 
+    height: 25vh; 
+  }
+  .events-hero h1 { font-size: 1.4rem; }
+  .events-hero p { font-size: 0.85rem; }
 
+  /* EVENT CARD */
+  .event-card-new {
+    max-width: 90%;        /* fit screen */
+    margin: 0 auto 15px;   /* center and spacing */
+    border-radius: 10px;
+    border: 1px solid #d1d5db;
+  }
+
+  .event-card-body { 
+    flex-direction: column; 
+    text-align: center; 
+    padding: 10px; 
+    gap: 10px;
+  }
+
+  .event-card-icon { 
+    width: 60px;  
+    height: 60px;
+    font-size: 36px;
+    border-radius: 8px;
+  }
+
+  .event-card-date {
+    padding: 6px; 
+  }
+  .event-card-date strong { font-size: 18px; }
+  .event-card-date span { font-size: 11px; }
+
+  .event-card-info h3 { font-size: 0.95rem; }
+  .event-desc { font-size: 12px; }
+  .event-view-btn { padding: 5px 10px; font-size: 12px; }
+}
+
+
+      `}</style>
     </div>
   );
 }

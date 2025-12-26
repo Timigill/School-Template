@@ -1,82 +1,121 @@
 "use client";
 
+import { useState } from "react";
 import { usePathname } from "next/navigation";
 
 export default function AdminLayout({ children }) {
   const pathname = usePathname();
   const isLoginPage = pathname === "/admin/login";
+  const [menuOpen, setMenuOpen] = useState(false);
 
-  //  Login page: NO admin layout
-  if (isLoginPage) {
-    return <>{children}</>;
-  }
+  if (isLoginPage) return <>{children}</>;
 
-  //  Admin panel layout
   return (
-    <div style={styles.container}>
-      <aside style={styles.sidebar}>
-        <h2 style={styles.logo}>School Admin</h2>
+    <div className="admin-wrapper">
+      {/* Mobile Top Bar */}
+      <div className="mobile-topbar">
+        <button onClick={() => setMenuOpen(!menuOpen)}>☰</button>
+        <span>Admin Panel</span>
+      </div>
 
+      {/* Sidebar */}
+      <aside className={`sidebar ${menuOpen ? "open" : ""}`}>
+        <h2 className="logo">Admin</h2>
         <nav>
-          <ul style={styles.navList}>
-            <li><a href="/admin" style={styles.link}>Dashboard</a></li>
-            <li><a href="/admin/events" style={styles.link}>Events</a></li>
-            <li><a href="/admin/faculty" style={styles.link}>Faculty</a></li>
-            <li><a href="/" style={styles.link}>Main Site</a></li>
-          </ul>
+          <a href="/admin">Dashboard</a>
+          <a href="/admin/events">Events</a>
+          <a href="/admin/faculty">Faculty</a>
+          <a href="/">Main Site</a>
         </nav>
       </aside>
 
-      <main style={styles.main}>
-        <header style={styles.header}>
-          <span>Welcome, Admin</span>
-        </header>
-
-        <section style={styles.content}>
-          {children}
-        </section>
+      {/* Main */}
+      <main className="content" onClick={() => setMenuOpen(false)}>
+        {children}
       </main>
+
+      <style jsx>{`
+        .admin-wrapper {
+          display: flex;
+          min-height: 100vh;
+          background: #f1f5f9;
+        }
+
+        /* ===== SIDEBAR ===== */
+        .sidebar {
+          width: 220px;
+          background: var(--primary-color);
+          color: #fff;
+          padding: 20px;
+        }
+
+        .logo {
+          margin-bottom: 20px;
+          font-size: 18px;
+          font-weight: 700;
+        }
+
+        .sidebar nav a {
+          display: block;
+          color: #e2e8f0;
+          text-decoration: none;
+          margin-bottom: 12px;
+          font-size: 14px;
+        }
+
+        /* ===== MAIN ===== */
+        .content {
+          flex: 1;
+          padding: 16px;
+        }
+
+        /* ===== MOBILE ===== */
+        .mobile-topbar {
+          display: none;
+        }
+
+        @media (max-width: 768px) {
+          .admin-wrapper {
+            flex-direction: column;
+          }
+
+          .mobile-topbar {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            background: var(--primary-color);
+            color: #fff;
+            padding: 19px 16px;
+          }
+
+          .mobile-topbar button {
+            background: none;
+            border: none;
+            color: #fff;
+            font-size: 20px;
+            cursor: pointer;
+          }
+
+          .sidebar {
+            position: absolute;
+            top: 52px;
+            left: 0;
+            width: 180px;
+            height: calc(100vh - 52px);
+            transform: translateX(-100%);
+            transition: transform 0.25s ease;
+            z-index: 100;
+          }
+
+          .sidebar.open {
+            transform: translateX(0);
+          }
+
+          .content {
+            padding: 14px;
+          }
+        }
+      `}</style>
     </div>
   );
 }
-
-const styles = {
-  container: {
-    display: "flex",
-    minHeight: "100vh",
-    fontFamily: "Arial, sans-serif",
-  },
-  sidebar: {
-    width: "220px",
-    backgroundColor: "var(--primary-color)",
-    color: "#fff",
-    padding: "20px",
-  },
-  logo: {
-    fontSize: "20px",
-    fontWeight: "700",
-    marginBottom: "20px",
-  },
-  navList: {
-    listStyle: "none",
-    padding: 0,
-  },
-  link: {
-    display: "block",
-    padding: "10px 0",
-    color: "#cbd5e1",
-    textDecoration: "none",
-  },
-  main: {
-    flex: 1,
-    backgroundColor: "#f1f5f9",
-  },
-  header: {
-    backgroundColor: "#fff",
-    padding: "16px",
-    borderBottom: "1px solid #e5e7eb",
-  },
-  content: {
-    padding: "24px",
-  },
-};
