@@ -1,34 +1,35 @@
-import { Inter } from 'next/font/google';
-import './globals.css';
-import { Toaster } from 'react-hot-toast';
+"use client";
 
-import NavBar from '../components/layout/NavBar';
-import Footer from '../components/layout/Footer';
+import { Inter } from "next/font/google";
+import "./globals.css";
+import { Toaster } from "react-hot-toast";
+import BootstrapClient from "../components/BootstrapClient";
+import NavBar from "../components/layout/NavBar";
+import Footer from "../components/layout/Footer";
+import { usePathname } from "next/navigation";
 
-const inter = Inter({ subsets: ['latin'] });
-
-export const metadata = {
-  title: 'Oxford House System',
-  description: 'Where Excellence Meets Perfection',
-  icons: {
-    icon: '/favico.ico', // or '/favicon.png'
-  },
-};
+const inter = Inter({ subsets: ["latin"] });
 
 export default function RootLayout({ children }) {
+  const pathname = usePathname();
+
+  // agar route /admin se start hota hai
+  const isAdminRoute = pathname.startsWith("/admin");
+
   return (
     <html lang="en">
-      <head>
-
-
-      </head>
       <body className={inter.className}>
+        <BootstrapClient />
         <Toaster />
-        <NavBar />
+
+        {/* sirf public pages par navbar */}
+        {!isAdminRoute && <NavBar />}
+
         {children}
-        <Footer />
+
+        {/* sirf public pages par footer */}
+        {!isAdminRoute && <Footer />}
       </body>
     </html>
   );
-
 }

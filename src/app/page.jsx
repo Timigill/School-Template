@@ -1,16 +1,10 @@
 'use client';
 
-// Enable client-side features for scroll detection and animations
 
-import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
-import Image from 'next/image';
-import Link from 'next/link';
 import HeroSection from '../components/home/HeroSection';
 import WhyChooseUs from '../components/home/why-us';
-import ContactForm from '../components/contact/ContactForm';
-import MapComponent from '../components/shared/Map';
 import CTASection from '../components/home/CTA';
 import VisionMissionValues from '../components/home/MissionVision';
 import CoreValues from '../components/home/CoreValues';
