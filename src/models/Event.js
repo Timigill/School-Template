@@ -6,6 +6,7 @@ const EventSchema = new mongoose.Schema({
   time: { type: String, required: [true, "Time is required"], trim: true, minlength: 1 },
   location: { type: String, required: [true, "Location is required"], trim: true, minlength: 1 },
   description: { type: String, required: true },
+  image: { type: String, required: true },
 });
 
 

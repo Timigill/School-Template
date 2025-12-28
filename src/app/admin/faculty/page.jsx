@@ -12,6 +12,9 @@ export default function FacultyPage() {
     role: "",
     email: "",
     phone: "",
+    department: "",
+    qualification: "",
+    imageFile: null, // store the selected file
   });
 
   const fetchFaculty = async () => {
@@ -30,48 +33,59 @@ export default function FacultyPage() {
 
   const handleAddOrEdit = async () => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    const phoneRegex = /^[0-9]{10,15}$/; // Adjust min/max digits as needed
+    const phoneRegex = /^[0-9]{10,15}$/;
 
     if (!newFaculty.name || !newFaculty.role || !newFaculty.email) {
       toast.error("Name, role, and email are required");
       return;
     }
-
     if (!emailRegex.test(newFaculty.email)) {
       toast.error("Invalid email format");
       return;
     }
-
     if (newFaculty.phone && !phoneRegex.test(newFaculty.phone)) {
       toast.error("Phone number must be 10-15 digits");
       return;
     }
 
     try {
+      const formData = new FormData();
+      formData.append("name", newFaculty.name);
+      formData.append("role", newFaculty.role);
+      formData.append("email", newFaculty.email);
+      formData.append("phone", newFaculty.phone);
+      formData.append("department", newFaculty.department);
+      formData.append("qualification", newFaculty.qualification);
+      if (newFaculty.imageFile) formData.append("image", newFaculty.imageFile);
+      if (editingId) formData.append("id", editingId);
+
+      const res = await fetch("/api/faculty", {
+        method: editingId ? "PUT" : "POST",
+        body: formData,
+      });
+
+      const saved = await res.json();
       if (editingId) {
-        const res = await fetch("/api/faculty", {
-          method: "PUT",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ id: editingId, ...newFaculty }),
-        });
-        const updated = await res.json();
-        setFaculties(faculties.map((f) => (f._id === editingId ? updated : f)));
+        setFaculties(faculties.map((f) => (f._id === editingId ? saved : f)));
         toast.success("Faculty updated");
       } else {
-        const res = await fetch("/api/faculty", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(newFaculty),
-        });
-        const created = await res.json();
-        setFaculties([...faculties, created]);
+        setFaculties([...faculties, saved]);
         toast.success("Faculty added");
       }
 
-      setNewFaculty({ name: "", role: "", email: "", phone: "" });
+      setNewFaculty({
+        name: "",
+        role: "",
+        email: "",
+        phone: "",
+        department: "",
+        qualification: "",
+        imageFile: null,
+      });
       setEditingId(null);
       setIsModalOpen(false);
     } catch (err) {
+      console.error(err);
       toast.error("Failed to save faculty");
     }
   };
@@ -82,6 +96,9 @@ export default function FacultyPage() {
       role: faculty.role,
       email: faculty.email,
       phone: faculty.phone || "",
+      department: faculty.department || "",
+      qualification: faculty.qualification || "",
+      imageFile: null, // keep null initially; user can replace
     });
     setEditingId(faculty._id);
     setIsModalOpen(true);
@@ -187,10 +204,25 @@ export default function FacultyPage() {
         ) : (
           faculties.map((f) => (
             <div key={f._id} className="card">
+              {f.image && (
+                <img
+                  src={f.image}
+                  alt={f.name}
+                  style={{
+                    width: "150px",
+                    height: "150px",
+                    borderRadius: "50%",
+                    marginTop: "6px",
+                    objectFit: "cover",
+                  }}
+                />
+              )}
               <h3>{f.name}</h3>
               <p>Role: {f.role}</p>
               <p>Email: {f.email}</p>
               {f.phone && <p>Phone: {f.phone}</p>}
+              {f.department && <p>Department: {f.department}</p>}
+              {f.qualification && <p>Qualification: {f.qualification}</p>}
               <div className="actions">
                 <button className="edit-btn" onClick={() => handleEdit(f)}>
                   Edit
@@ -238,6 +270,27 @@ export default function FacultyPage() {
               value={newFaculty.phone}
               onChange={(e) =>
                 setNewFaculty({ ...newFaculty, phone: e.target.value })
+              }
+            />
+            <input
+              placeholder="Department"
+              value={newFaculty.department}
+              onChange={(e) =>
+                setNewFaculty({ ...newFaculty, department: e.target.value })
+              }
+            />
+            <input
+              placeholder="Qualification"
+              value={newFaculty.qualification}
+              onChange={(e) =>
+                setNewFaculty({ ...newFaculty, qualification: e.target.value })
+              }
+            />
+            <input
+              type="file"
+              accept="image/*"
+              onChange={(e) =>
+                setNewFaculty({ ...newFaculty, imageFile: e.target.files[0] })
               }
             />
             <div className="modal-actions">
@@ -300,12 +353,13 @@ export default function FacultyPage() {
         }
         .card {
           background: #fff;
-          padding: 16px;
+          padding: 20px;
           border-radius: 10px;
           border: 1px solid #ddd;
         }
         .card h3 {
-          margin: 0 0 6px 0;
+          margin: 10px 0 6px 0;
+          font-size: 22px;
           color: var(--primary-color);
         }
         .card p {
@@ -377,7 +431,7 @@ export default function FacultyPage() {
           border: 1px solid #ccc;
           width: 100%;
           font-size: 14px;
-          outline: none; 
+          outline: none;
         }
 
         .modal input:focus {
@@ -442,7 +496,16 @@ export default function FacultyPage() {
           }
           .card {
             padding: 14px;
+            justify-content: center;
+            text-align: center;
+
             border-radius: 8px;
+          }
+          .card img {
+            justify-content: center;
+            margin: 0 auto 10px auto;
+            width: 100px;
+            height: 100px;
           }
           .card h3 {
             font-size: 16px;

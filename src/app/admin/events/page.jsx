@@ -1,30 +1,29 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { useRouter } from "next/navigation";
 import toast, { Toaster } from "react-hot-toast";
 
 export default function EventsPage() {
-  const router = useRouter();
-
   const [events, setEvents] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [editingEventId, setEditingEventId] = useState(null);
+
   const [newEvent, setNewEvent] = useState({
     title: "",
     date: "",
     time: "",
     location: "",
     description: "",
+    image: null,
   });
-  const [editingEventId, setEditingEventId] = useState(null);
 
+  // ---------------- FETCH EVENTS ----------------
   const fetchEvents = async () => {
     try {
       const res = await fetch("/api/events");
       const data = await res.json();
       setEvents(data);
-    } catch (err) {
-      console.error(err);
+    } catch {
       toast.error("Failed to fetch events");
     }
   };
@@ -33,91 +32,67 @@ export default function EventsPage() {
     fetchEvents();
   }, []);
 
+  // ---------------- ADD / UPDATE ----------------
   const handleAddOrEditEvent = async () => {
-    if (
-      !newEvent.title ||
-      !newEvent.date ||
-      !newEvent.time ||
-      !newEvent.location ||
-      !newEvent.description
-    ) {
-      toast.error("Please fill all fields");
+    const { title, date, time, location, description, image } = newEvent;
+
+    if (!title || !date || !time || !location || !description) {
+      toast.error("All fields are required");
       return;
     }
 
+    const formData = new FormData();
+    formData.append("title", title);
+    formData.append("date", date);
+    formData.append("time", time);
+    formData.append("location", location);
+    formData.append("description", description);
+
+    if (image) formData.append("image", image);
+    if (editingEventId) formData.append("id", editingEventId);
+
     try {
-      if (editingEventId) {
-        const res = await fetch("/api/events", {
-          method: "PUT",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ id: editingEventId, ...newEvent }),
-        });
-        const updated = await res.json();
-        setEvents(events.map((e) => (e._id === editingEventId ? updated : e)));
-        toast.success("Event updated successfully");
-      } else {
-        const res = await fetch("/api/events", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(newEvent),
-        });
-        const created = await res.json();
-        setEvents([...events, created]);
-        toast.success("Event created successfully");
-      }
+      const res = await fetch("/api/events", {
+        method: editingEventId ? "PUT" : "POST",
+        body: formData,
+      });
+
+      if (!res.ok) throw new Error();
+
+      toast.success(editingEventId ? "Event updated" : "Event created");
+
+      setIsModalOpen(false);
+      setEditingEventId(null);
       setNewEvent({
         title: "",
         date: "",
         time: "",
         location: "",
         description: "",
+        image: null,
       });
-      setEditingEventId(null);
-      setIsModalOpen(false);
-    } catch (err) {
-      console.error(err);
+
+      fetchEvents();
+    } catch {
       toast.error("Failed to save event");
     }
   };
 
-  // Convert 12-hour to 24-hour for time input
-  function convert12To24(time12h) {
-    if (!time12h) return "";
-    const [time, modifier] = time12h.split(" ");
-    if (!time || !modifier) return time12h; // fallback if format unexpected
-    let [hours, minutes] = time.split(":").map(Number);
-    if (modifier.toLowerCase() === "pm" && hours !== 12) hours += 12;
-    if (modifier.toLowerCase() === "am" && hours === 12) hours = 0;
-    return `${String(hours).padStart(2, "0")}:${String(minutes).padStart(
-      2,
-      "0"
-    )}`;
-  }
-
-  // Convert 24-hour to 12-hour for display (optional)
-  function convert24To12(time24h) {
-    if (!time24h) return "";
-    let [hours, minutes] = time24h.split(":").map(Number);
-    const modifier = hours >= 12 ? "PM" : "AM";
-    hours = hours % 12 || 12;
-    return `${String(hours).padStart(2, "0")}:${String(minutes).padStart(
-      2,
-      "0"
-    )} ${modifier}`;
-  }
-
+  // ---------------- EDIT ----------------
   const handleEdit = (event) => {
     setNewEvent({
       title: event.title,
       date: new Date(event.date).toISOString().slice(0, 10),
-      time: event.time || "", // just use the stored 24-hour value
-      location: event.location || "",
+      time: event.time,
+      location: event.location,
       description: event.description,
+      image: null,
     });
     setEditingEventId(event._id);
     setIsModalOpen(true);
   };
 
+  // ---------------- DELETE ----------------
   const handleDelete = (id) => {
     toast(
       (t) => (
@@ -140,7 +115,11 @@ export default function EventsPage() {
             Are you sure you want to delete this event?
           </p>
           <div
-            style={{ display: "flex", justifyContent: "center", gap: "12px" }}
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              gap: "12px",
+            }}
           >
             <button
               style={{
@@ -199,56 +178,82 @@ export default function EventsPage() {
   return (
     <div className="admin-wrapper">
       <Toaster />
+
       <div className="top-bar">
         <h1>Events & Activities</h1>
-        <p>Manage all school events</p>
         <button className="add-btn" onClick={() => setIsModalOpen(true)}>
           + Create Event
         </button>
       </div>
 
-      <div className="events-list">
-        {events.length === 0 ? (
-          <p>No events found. Add a new event.</p>
-        ) : (
-          events.map((event) => (
-            <div key={event._id} className="card">
-              <h3>{event.title}</h3>
-              <p className="event-date">
-                Date: {new Date(event.date).toLocaleDateString()} | Time:{" "}
-                {convert24To12(event.time)}
-              </p>
-
-              <p className="event-location">Location: {event.location}</p>
-              <p className="event-desc">{event.description}</p>
-              <div className="actions">
-                <button className="edit-btn" onClick={() => handleEdit(event)}>
-                  Edit
-                </button>
-                <button
-                  className="delete-btn"
-                  onClick={() => handleDelete(event._id)}
-                >
-                  Delete
-                </button>
-              </div>
-            </div>
-          ))
-        )}
+      {/* ---------------- TABLE ---------------- */}
+      <div className="table-wrapper">
+        <table>
+          <thead>
+            <tr>
+              <th>Title</th>
+              <th>Date</th>
+              <th>Time</th>
+              <th>Location</th>
+              <th>Description</th>
+              <th>Image</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            {events.map((event) => (
+              <tr key={event._id}>
+                <td>{event.title}</td>
+                <td>{new Date(event.date).toLocaleDateString()}</td>
+                <td>{event.time}</td>
+                <td>{event.location}</td>
+                <td>
+                  <div className="description-scroll">{event.description}</div>
+                </td>{" "}
+                <td>
+                  {event.image && (
+                    <img
+                      src={event.image}
+                      alt={event.title}
+                      className="event-img"
+                    />
+                  )}
+                </td>
+                <td>
+                  <button
+                    className="edit-btn"
+                    onClick={() => handleEdit(event)}
+                  >
+                    Edit
+                  </button>
+                  <button
+                    className="delete-btn"
+                    onClick={() => handleDelete(event._id)}
+                  >
+                    Delete
+                  </button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
       </div>
 
+      {/* ---------------- MODAL ---------------- */}
       {isModalOpen && (
         <div className="modal-backdrop" onClick={() => setIsModalOpen(false)}>
           <div className="modal" onClick={(e) => e.stopPropagation()}>
             <h2>{editingEventId ? "Edit Event" : "Create Event"}</h2>
+
             <input
               type="text"
-              placeholder="Event Title"
+              placeholder="Title"
               value={newEvent.title}
               onChange={(e) =>
                 setNewEvent({ ...newEvent, title: e.target.value })
               }
             />
+
             <input
               type="date"
               value={newEvent.date}
@@ -256,6 +261,7 @@ export default function EventsPage() {
                 setNewEvent({ ...newEvent, date: e.target.value })
               }
             />
+
             <input
               type="time"
               value={newEvent.time}
@@ -263,6 +269,7 @@ export default function EventsPage() {
                 setNewEvent({ ...newEvent, time: e.target.value })
               }
             />
+
             <input
               type="text"
               placeholder="Location"
@@ -271,13 +278,23 @@ export default function EventsPage() {
                 setNewEvent({ ...newEvent, location: e.target.value })
               }
             />
+
+            <input
+              type="file"
+              accept="image/*"
+              onChange={(e) =>
+                setNewEvent({ ...newEvent, image: e.target.files[0] })
+              }
+            />
+
             <textarea
-              placeholder="Event Description"
+              placeholder="Description"
               value={newEvent.description}
               onChange={(e) =>
                 setNewEvent({ ...newEvent, description: e.target.value })
               }
             />
+
             <div className="modal-actions">
               <button className="save-btn" onClick={handleAddOrEditEvent}>
                 {editingEventId ? "Update" : "Add"}
@@ -293,7 +310,7 @@ export default function EventsPage() {
         </div>
       )}
 
-      {/* Styles remain same as before */}
+      {/* ---------------- STYLES ---------------- */}
       <style jsx>{`
         .admin-wrapper {
           padding: 20px;
@@ -313,11 +330,6 @@ export default function EventsPage() {
           color: var(--primary-color);
           font-size: 1.8rem;
         }
-        .top-bar p {
-          margin: 4px 0 0;
-          color: #333;
-          font-size: 14px;
-        }
         .add-btn {
           padding: 8px 16px;
           background: var(--primary-color);
@@ -332,38 +344,66 @@ export default function EventsPage() {
           color: var(--primary-color);
           border: 1px solid var(--primary-color);
         }
-        .events-list {
-          display: grid;
-          grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-          gap: 16px;
-        }
-        .card {
+
+        .table-wrapper {
+          overflow-x: auto;
           background: #fff;
-          padding: 16px;
           border-radius: 10px;
-          border: 1px solid #ddd;
+          border: 1px solid var(--primary-color);
+          padding: 10px;
         }
-        .card h3 {
-          margin: 0 0 6px 0;
-          color: var(--primary-color);
+        table {
+          width: 100%;
+          border-collapse: collapse;
+          min-width: 700px;
         }
-        .event-date,
-        .event-desc {
+        th,
+        td {
+          padding: 12px;
+          text-align: left;
+          border-bottom: 1px solid #ddd;
           font-size: 14px;
-          color: #555;
-          margin-bottom: 8px;
+          vertical-align: middle;
         }
-        .actions button {
-          margin-right: 8px;
-          padding: 4px 12px;
+        th {
+          background: var(--primary-color);
+          color: #fff;
+        }
+        .description-scroll {
+          max-width: 300px;
+          max-height: 70px;
+          overflow-y: auto;
+          word-wrap: break-word;
+          padding-right: 4px;
+        }
+        .description-scroll::-webkit-scrollbar {
+          width: 4px;
+        }
+
+        .description-scroll::-webkit-scrollbar-track {
+          background: #f1f1f1;
           border-radius: 6px;
-          font-weight: 600;
-          cursor: pointer;
+        }
+
+        .description-scroll::-webkit-scrollbar-thumb {
+          background-color: var(--primary-color);
+          border-radius: 3px;
+        }
+        .event-img {
+          width: 80px;
+          height: 80px;
+          object-fit: cover;
+          border-radius: 4px;
         }
         .edit-btn {
           background: var(--primary-color);
           border: none;
           color: #fff;
+          padding: 6px 12px;
+          border-radius: 6px;
+          cursor: pointer;
+          margin-right: 5px;
+          margin-bottom: 5px;
         }
         .edit-btn:hover {
           background: #fff;
@@ -374,11 +414,16 @@ export default function EventsPage() {
           background: #fff;
           border: 1px solid var(--primary-color);
           color: var(--primary-color);
+          padding: 6px 12px;
+          border-radius: 6px;
+          cursor: pointer;
         }
         .delete-btn:hover {
           background: var(--primary-color);
           color: #fff;
         }
+
+        /* Modal & other styles remain unchanged */
         .modal-backdrop {
           position: fixed;
           top: 0;
@@ -403,12 +448,13 @@ export default function EventsPage() {
           display: flex;
           flex-direction: column;
           gap: 10px;
-          max-height: 55vh;
+          max-height: 60vh;
           overflow-y: auto;
         }
         .modal h2 {
           margin: 0 0 10px 0;
-          font-size: 22px;
+          font-size: 26px;
+          text-align: center;
           color: var(--primary-color);
         }
         .modal input,
@@ -420,18 +466,10 @@ export default function EventsPage() {
           font-size: 14px;
           outline: none;
         }
-
         .modal textarea {
           resize: vertical;
           min-height: 60px;
         }
-
-        /* Focus state */
-        .modal input:focus,
-        .modal textarea:focus {
-          border-color: var(--primary-color);
-        }
-
         .modal-actions {
           display: flex;
           justify-content: flex-end;
@@ -464,82 +502,24 @@ export default function EventsPage() {
           color: #fff;
         }
 
-        /* Responsive Mobile Styles */
-        @media (max-width: 500px) {
-          /* Top bar adjustments */
+        /* Responsive Table */
+        @media (max-width: 600px) {
           .top-bar {
             flex-direction: column;
             align-items: center;
             gap: 10px;
-            margin-bottom: 20px;
           }
-          .top-bar h1 {
-            font-size: 1.4rem;
-            text-align: center;
-            line-height: 1.2;
-          }
-          .top-bar p {
+          table {
             font-size: 12px;
-            color: #555;
+            min-width: 100%;
           }
-          .top-bar .add-btn {
-            font-size: 12px;
-            padding: 6px 12px;
-            width: 30%;
-            text-align: center;
+          .event-img {
+            width: 50px;
+            height: 30px;
           }
-
-          /* Events list and card adjustments */
-          .events-list {
-            grid-template-columns: 1fr;
-            gap: 12px;
-          }
-          .card {
-            padding: 14px;
-            border-radius: 8px;
-          }
-          .card h3 {
-            font-size: 16px;
-          }
-          .event-date,
-          .event-desc {
-            font-size: 13px;
-            margin-bottom: 6px;
-          }
-          .actions {
-            flex-wrap: wrap;
-            gap: 8px;
-          }
-          .actions button {
-            flex: 1 1 78%;
-            padding: 8px 16px;
-            font-size: 12px;
-          }
-
-          /* Modal adjustments */
-          .modal {
-            width: 90%;
-            padding: 18px;
-            max-height: 37vh;
-            overflow-y: auto;
-          }
-          .modal h2 {
-            font-size: 18px;
-            margin-bottom: 10px;
-          }
-          .modal input,
-          .modal textarea {
-            font-size: 13px;
+          th,
+          td {
             padding: 8px;
-          }
-          .modal-actions {
-            flex-direction: column;
-            gap: 8px;
-          }
-          .modal-actions button {
-            width: 100% !important;
-            padding: 10px 0;
-            font-size: 14px;
           }
         }
       `}</style>

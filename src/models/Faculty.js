@@ -5,6 +5,9 @@ const FacultySchema = new mongoose.Schema({
   role: { type: String, required: true }, // e.g., "Teacher", "Admin"
   email: { type: String, required: true, unique: true },
   phone: { type: String },
+  department: { type: String },          // New field
+  qualification: { type: String },       // New field
+  image: { type: String },               // URL or base64 string
   joinedAt: { type: Date, default: Date.now },
 });
 
