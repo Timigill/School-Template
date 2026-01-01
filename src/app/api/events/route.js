@@ -3,9 +3,11 @@ import fs from "fs";
 import connectToDB from "@/lib/mongodb";
 import Event from "@/models/Event";
 
-export const config = {
-  api: { bodyParser: false },
-};
+
+export const bodyParser = false;
+export const dynamic = "force-dynamic";
+export const runtime = "nodejs";
+
 
 // helper: save image
 async function saveFile(file) {

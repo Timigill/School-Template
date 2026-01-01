@@ -3,7 +3,10 @@ import fs from "fs";
 import Faculty from "@/models/Faculty";
 import connectMongo from "@/lib/mongodb";
 
-export const config = { api: { bodyParser: false } };
+export const bodyParser = false;
+export const dynamic = "force-dynamic";
+export const runtime = "nodejs";
+
 
 // Helper to save uploaded image
 async function saveFile(file) {
